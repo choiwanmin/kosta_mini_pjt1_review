@@ -6,10 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AdminDao {
-  DBConnect db;
-  AdminDao(){
+  private DBConnect db;
+  public AdminDao(){
     db = DBConnect.getInstance();
   }
 
@@ -73,6 +74,39 @@ public class AdminDao {
       }
     }
     return a;
+  }
+
+  public Admin selectId(String id){
+    Connection conn = db.conn();
+    String sql = "select * from admin where id = ?";
+    Admin a = null;
+    try {
+      PreparedStatement pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, id);
+      ResultSet rs = pstmt.executeQuery();
+      if(rs.next()){
+        a = new Admin(rs.getString(1), rs.getNString(2), rs.getInt(3), rs.getInt(4) );
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return a;
+  }
+
+  public ArrayList<Admin> selectAll(){
+    Connection conn = db.conn();
+    String sql = "select * from admin";
+    ArrayList<Admin> list = new ArrayList<>();
+    try {
+      PreparedStatement pstmt = conn.prepareStatement(sql);
+      ResultSet rs = pstmt.executeQuery();
+      while (rs.next()){
+        list.add(new Admin(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4)));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return list;
   }
 
   // 수정

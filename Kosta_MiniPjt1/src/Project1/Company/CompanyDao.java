@@ -152,13 +152,13 @@ public class CompanyDao {
 	}
 
 	// 기업정보검색(기업번호) admin
-	public Company selectCompany(int cnum) {
+	public Company selectCompany(int userid) {
 		Connection conn = db.conn();
 		Company c = null;
-		String sql = "select * from company where cnum =?";
+		String sql = "select * from company where userid =?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, cnum);
+			ps.setInt(1, userid);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				c = new Company(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(6),

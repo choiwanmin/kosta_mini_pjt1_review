@@ -9,8 +9,8 @@ public class CompanyService {
 	public CompanyService() {
 		dao = new CompanyDao();
 	}
-	
-	
+
+
 	// 기업 등록
 	public void addCompany(Scanner sc) {
 		System.out.println("===기업등록===");
@@ -112,8 +112,9 @@ public class CompanyService {
 		} else {
 			for (Company c : list) {
 				System.out.println("기업이름 : " + c.getCname() + "기업분야 : " + c.getField() + "기업 전화번호 : " + c.getTell()
-				+ "기업 이메일 : " + c.getEmail() + "기업주소 : " + c.getAddr());
+						+ "기업 이메일 : " + c.getEmail() + "기업주소 : " + c.getAddr());
 			}
 		}
 
 	}
+}

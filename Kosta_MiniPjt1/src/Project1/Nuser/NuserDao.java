@@ -9,7 +9,7 @@ import JDBC.DBConnect;
 
 public class NuserDao {
   DBConnect db;
-  NuserDao(){
+  public NuserDao(){
     db = DBConnect.getInstance();
   }
 
