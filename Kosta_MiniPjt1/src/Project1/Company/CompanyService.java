@@ -72,20 +72,6 @@ public class CompanyService {
 		}
 	}
 
-	// 기업 정보 조회(기업번호)
-	public void printCompany(Scanner sc) {
-		System.out.println("===기업정보 조회(기업번호)===");
-		System.out.print("검색할 기업번호:");
-		int cnum = sc.nextInt();
-		Company c = dao.selectCompany(cnum);
-		if (c == null) {
-			System.out.println("조회된 기업 없음");
-		} else {
-			System.out.println(c);
-		}
-
-	}
-
 	// 기업 정보 조회 (분야)
 	public void printCompanyByFiled(Scanner sc) {
 		System.out.println("===기업정보 조회(분야)===");
@@ -117,3 +103,4 @@ public class CompanyService {
 		}
 
 	}
+}
