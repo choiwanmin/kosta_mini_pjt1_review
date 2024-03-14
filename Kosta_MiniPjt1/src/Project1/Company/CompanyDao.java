@@ -155,7 +155,7 @@ public class CompanyDao {
 	public Company selectCompany(int userid) {
 		Connection conn = db.conn();
 		Company c = null;
-		String sql = "select * from company where cnum =?";
+		String sql = "select * from company where userid =?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, userid);
