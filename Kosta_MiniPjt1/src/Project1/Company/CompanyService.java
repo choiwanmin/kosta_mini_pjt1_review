@@ -76,7 +76,7 @@ public class CompanyService {
 	}
 
 	// 기업 정보 조회 (분야)
-	public void printCompanyByFiled(Scanner sc) {
+	public ArrayList<Company> printCompanyByFiled(Scanner sc) {
 		System.out.println("===기업정보 조회(분야)===");
 		System.out.print("찾을 분야:");
 		String field = sc.next();
@@ -85,10 +85,11 @@ public class CompanyService {
 			System.out.println("조회된 기업 없음");
 		} else {
 			for (Company c : list) {
-				System.out.println("기업이름: " + c.getCname() + " 기업분야: " + c.getField() + " 기업 전화번호: " + c.getTell()
-						+ " 기업 이메일: " + c.getEmail() + " 기업주소: " + c.getAddr());
+				System.out.println("기업이름 : " + c.getCname() + ", 기업분야 : " + c.getField() + ", 기업 전화번호 : " + c.getTell()
+						+ "\n , 기업 이메일 : " + c.getEmail() + ", 기업주소 : " + c.getAddr());
 			}
 		}
+		return list;
 	}
 
 	// 기업 정보 전체조회
@@ -99,8 +100,8 @@ public class CompanyService {
 			System.out.println("조회된 기업 없음");
 		} else {
 			for (Company c : list) {
-				System.out.println("기업이름 : " + c.getCname() + " 기업분야 : " + c.getField() + " 기업 전화번호 : " + c.getTell()
-						+ " 기업 이메일 : " + c.getEmail() + " 기업주소 : " + c.getAddr());
+				System.out.println("기업이름 : " + c.getCname() + ", 기업분야 : " + c.getField() + ", 기업 전화번호 : " + c.getTell()
+						+ "\n , 기업 이메일 : " + c.getEmail() + ", 기업주소 : " + c.getAddr());
 			}
 		}
 

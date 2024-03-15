@@ -83,8 +83,11 @@ public class AdminService {
     System.out.print("조회할 회원 번호 : ");
     int num = sc.nextInt();
     System.out.println(dao.select(num));
-//    System.out.println(ndao.select(num));
-//    System.out.println(cdao.selectCompany(num));
+    if(dao.select(num).getGrade()==1){ // 일반, 기업 필터 출력
+    System.out.println(ndao.select(num));
+    } else {
+    System.out.println(cdao.selectCompany(num));
+    }
   }
 
   // 회원 삭제
@@ -92,15 +95,18 @@ public class AdminService {
     System.out.println("=== 회원 삭제 ===");
     System.out.print("삭제할 회원 번호 : ");
     int num = sc.nextInt();
-    System.out.println("!!! 삭제할 회원이 맞습니까? 아니면 0 !!!");
-//    System.out.println(ndao.select(num));
-//    System.out.println(cdao.selectCompany(num));
-    int check = sc.nextInt();
-    if(check == 0){
-      System.out.println("삭제 취소");
+    System.out.println("!!! 삭제할 회원이 맞습니까? 맞으면 1 !!!");
+    if(dao.select(num).getGrade()==1){ // 일반, 기업 필터 출력
+      System.out.println(ndao.select(num));
     } else {
+      System.out.println(cdao.selectCompany(num));
+    }
+    int check = sc.nextInt();
+    if(check == 1){
       System.out.println("삭제 완료");
       dao.delete(num);
+    } else {
+      System.out.println("삭제 취소");
     }
   }
 
