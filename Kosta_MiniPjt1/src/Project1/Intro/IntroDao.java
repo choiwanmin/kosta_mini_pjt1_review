@@ -16,16 +16,17 @@ public class IntroDao {
 	}
 	
 	// 이력서 등록
-	public void insert(Intro i) {
+	public void insert(Intro i, int num) {
 		Connection conn = db.conn();
 
-		String sql = "insert into intro values(0,?,?,seql_intro.nextval,?)";
+		String sql = "insert into intro values(?,?,?,seq_intro.nextval,?)";
 
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, i.getTitle());
-			pstmt.setString(2, i.getContent());
-			pstmt.setString(3, i.getSubmit());
+			pstmt.setInt(1, num);
+			pstmt.setString(2, i.getTitle());
+			pstmt.setString(3, i.getContent());
+			pstmt.setString(4, i.getSubmit());
 
 			int cnt = pstmt.executeUpdate();
 		} catch (SQLException e) {

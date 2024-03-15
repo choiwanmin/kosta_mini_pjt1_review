@@ -12,7 +12,6 @@ public class CompanyService {
 		dao = new CompanyDao();
 	}
 
-
 	// 기업 등록
 	public void addCompany(Scanner sc) {
 		System.out.println("===기업등록===");
@@ -29,7 +28,7 @@ public class CompanyService {
 		System.out.print("기업 주소:");
 		String addr = sc.next();
 		Company p = new Company(0, 0, cname, field, id, tell, email, addr);
-		int cnt = dao.insertCompany(p);
+		int cnt = dao.insertCompany(p, AdminService.UserID);
 		if (cnt > 0) {
 			System.out.println("기업 등록 완료");
 		} else {
@@ -60,25 +59,24 @@ public class CompanyService {
 		}
 	}
 
-	// 기업 삭제
+	// 기업회원탈퇴
 	public void deleteCompany(Scanner sc) {
-		System.out.println("===기업 삭제===");
+		System.out.println("===기업회원탈퇴===");
 		System.out.print("기업정보를 삭제하시겠습니까? 1.삭제 2.취소:");
 		int x = sc.nextInt();
-		if(x==1) {
+		if (x == 1) {
 			dao.deleteCompany(AdminService.UserID);
 			System.out.println("기업 삭제 완료");
-		}else if(x==2){
+		} else if (x == 2) {
 			System.out.println("기업 삭제 취소");
-		}else {
+		} else {
 			System.out.println("잘못된 입력입니다");
 		}
-		
-		
+
 	}
 
 	// 기업 정보 조회 (분야)
-	public void printCompanyByFiled(Scanner sc) {
+	public ArrayList<Company> printCompanyByFiled(Scanner sc) {
 		System.out.println("===기업정보 조회(분야)===");
 		System.out.print("찾을 분야:");
 		String field = sc.next();
@@ -91,7 +89,7 @@ public class CompanyService {
 						+ "기업 이메일 : " + c.getEmail() + "기업주소 : " + c.getAddr());
 			}
 		}
-
+		return list;
 	}
 
 	// 기업 정보 전체조회

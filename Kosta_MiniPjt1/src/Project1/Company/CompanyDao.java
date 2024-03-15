@@ -18,18 +18,19 @@ public class CompanyDao {
 	
 
 	// 기업 정보 등록
-	public int insertCompany(Company c) {
+	public int insertCompany(Company c, int num) {
 		Connection conn = db.conn();
 		int cnt = 0;
-		String sql = "insert into company values(0,company_seq.nextval,?,?,?,?,?,?)";
+		String sql = "insert into company values(?,company_seq.nextval,?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, c.getCname());
-			ps.setString(2, c.getField());
-			ps.setString(3, c.getId());
-			ps.setString(4, c.getTell());
-			ps.setString(5, c.getEmail());
-			ps.setString(6, c.getAddr());
+			ps.setInt(1, num);
+			ps.setString(2, c.getCname());
+			ps.setString(3, c.getField());
+			ps.setString(4, c.getId());
+			ps.setString(5, c.getTell());
+			ps.setString(6, c.getEmail());
+			ps.setString(7, c.getAddr());
 			cnt = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -46,10 +47,10 @@ public class CompanyDao {
 	}
 
 	// 기업 번호로 정보 수정 - 기업이름, 기업분야, 기업전화번호, 기업 이메일, 기업주소
-	public int updateCompany(Company c, int cnum) {
+	public int updateCompany(Company c, int num) {
 		Connection conn = db.conn();
 		int cnt = 0;
-		String sql = "update company set cname=?, field=?, tell=?, email=?, addr=? where cnum=?";
+		String sql = "update company set cname=?, field=?, tell=?, email=?, addr=? where userid=?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, c.getCname());
@@ -57,7 +58,7 @@ public class CompanyDao {
 			ps.setString(3, c.getTell());
 			ps.setString(4, c.getEmail());
 			ps.setString(5, c.getAddr());
-			ps.setInt(6, cnum);
+			ps.setInt(6, num);
 			cnt = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -106,8 +107,7 @@ public class CompanyDao {
 			ps.setString(1, field);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				list.add(new Company(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(6),
-						rs.getString(7), rs.getString(8), rs.getString(9)));
+				list.add(new Company(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)));
 			}
 			return list;
 		} catch (SQLException e) {
@@ -133,8 +133,8 @@ public class CompanyDao {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				list.add(new Company(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(6),
-						rs.getString(7), rs.getString(8), rs.getString(9)));
+				list.add(new Company(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),
+						rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)));
 			}
 			return list;
 		} catch (SQLException e) {
