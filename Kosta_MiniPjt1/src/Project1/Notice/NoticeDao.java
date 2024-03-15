@@ -68,6 +68,33 @@ public class NoticeDao {
 	}
 	
 	
+	//직무 이름으로 검색.
+	public ArrayList<Notice> selectByJob(String job) {
+		Connection conn = db.conn();
+		String sql = "select * from notice where job like ? order by num";
+		ArrayList<Notice> list = new ArrayList<Notice>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + job + "%");
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {// rs.next():읽을 줄로 이동을 해서 읽을 값이 있으면 true, 없으면 false
+				list.add(new Notice(rs.getInt(1),rs.getInt(2),rs.getDate(3),rs.getInt(4),rs.getString(5)));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
 	
 	public ArrayList<Notice> selectAll(){
 		Connection conn = db.conn();
