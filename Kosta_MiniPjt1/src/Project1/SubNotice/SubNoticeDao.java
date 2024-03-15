@@ -15,11 +15,13 @@ public class SubNoticeDao {
 		db = DBConnect.getInstance();
 	}
 
-	public void insert(SubNotice s) {
+	public void insert(int u, int o) {
 		Connection conn = db.conn();
-		String sql = "insert into notice values(0,0, seq1.nextval)";
+		String sql = "insert into SubNotice values(?,?, seq1.nextval)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, u);
+			pstmt.setInt(2, o);
 			int cnt = pstmt.executeUpdate();
 			System.out.println(cnt + " 줄 추가됨");
 		} catch (SQLException e) {
@@ -34,6 +36,8 @@ public class SubNoticeDao {
 			}
 		}
 	}
+	
+	
 
 	public ArrayList<SubNotice> selectAll() {
 		Connection conn = db.conn();
@@ -61,7 +65,7 @@ public class SubNoticeDao {
 
 	public void delete(int subnotice_id) {
 		Connection conn = db.conn();
-		String sql = "delete board where subnotice_id=?";
+		String sql = "delete SubNotice where subnotice_id=?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, subnotice_id);
