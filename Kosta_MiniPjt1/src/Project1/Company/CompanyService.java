@@ -67,6 +67,7 @@ public class CompanyService {
 		int x = sc.nextInt();
 		if(x==1) {
 			dao.deleteCompany(AdminService.UserID);
+			System.out.println("기업 삭제 완료");
 		}else if(x==2){
 			System.out.println("기업 삭제 취소");
 		}else {
