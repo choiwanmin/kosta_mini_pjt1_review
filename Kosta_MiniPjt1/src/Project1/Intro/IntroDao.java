@@ -14,11 +14,12 @@ public class IntroDao {
 	public IntroDao() {
 		db = DBConnect.getInstance();
 	}
-
+	
+	// 이력서 등록
 	public void insert(Intro i) {
 		Connection conn = db.conn();
 
-		String sql = "insert into intro values(0,?,?,seql_intro,?)";
+		String sql = "insert into intro values(0,?,?,seql_intro.nextval,?)";
 
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -40,7 +41,8 @@ public class IntroDao {
 		}
 
 	}
-
+	
+	// 이력서 수정 - 제목, 내용, 제출 회사
 	public void update(Intro i) {
 		Connection conn = db.conn();
 
@@ -65,7 +67,8 @@ public class IntroDao {
 			}
 		}
 	}
-
+	
+	// 이력서 삭제
 	public void delete(int id) {
 		Connection conn = db.conn();
 
@@ -88,7 +91,7 @@ public class IntroDao {
 			}
 		}
 	}
-
+	// 이력서 조회(번호)
 	public Intro selectById(int id) {
 		Connection conn = db.conn();
 		String sql = "select * from intro where id=?";
@@ -113,7 +116,7 @@ public class IntroDao {
 		}
 		return null;
 	}
-
+	// 이력서 조회(제목)
 	public ArrayList<Intro> selectByTitle(String title) {
 		Connection conn = db.conn();
 		String sql = "select * from intro where title like ? order by id";
@@ -139,33 +142,8 @@ public class IntroDao {
 		}
 		return list;
 	}
-
-	public ArrayList<Intro> selectByContent(String content) {
-		Connection conn = db.conn();
-		String sql = "select * from intro where content like ? order by id";
-		ArrayList<Intro> list = new ArrayList<>();
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + content + "%");
-
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				list.add(new Intro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-
+	
+	// 이력서 조회(전체)
 	public ArrayList<Intro> selectAll() {
 		Connection conn = db.conn();
 		String sql = "select * from intro order by id";
