@@ -96,7 +96,7 @@ public class NuserDao {
   // 개인정보 검색 (번호로 검색)
   public Nuser select(int num){
     Connection conn = db.conn();
-    String sql = "select * from board where unum = ?";
+    String sql = "select * from nuser where unum = ?";
     Nuser n = null;
     try {
       PreparedStatement prtmt = conn.prepareStatement(sql);
