@@ -87,6 +87,7 @@ public class NuserService {
 	}
 	
 	// 이력서 등록
+	//주석
 	public void addIntro(Scanner sc) {
 		System.out.println("=== 이력서 등록 ===");
 		System.out.print("title:");
