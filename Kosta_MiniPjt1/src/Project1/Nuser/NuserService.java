@@ -36,7 +36,7 @@ public class NuserService {
 	    System.out.print("자격증 : ");
 	    String license = sc.next();
 
-	    ndao.insert(new Nuser(0,0, name, edu, id, tel, email, addr, career ,license), 2);
+	    ndao.insert(new Nuser(0,0, name, edu, id, tel, email, addr, career ,license), AdminService.UserID);
 	  }
 
 	  // 회원정보 수정
@@ -59,7 +59,7 @@ public class NuserService {
 	    System.out.print("자격증 : ");
 	    String license = sc.next();
 
-	    ndao.update(new Nuser(0,0, name, edu, id, tel, email, addr,career ,license));
+	    ndao.update(new Nuser(0,0, name, edu, id, tel, email, addr,career ,license),AdminService.UserID);
 	  }
 
 	  // 회원정보 삭제
@@ -76,8 +76,7 @@ public class NuserService {
 	  // 회원정보 조회
 	  public void selectUser() {
 	    System.out.println("내 정보 확인");
-//	    System.out.println(ndao.select(AdminService.UserID));
-	    System.out.println(ndao.select(2));
+	    System.out.println(ndao.selectByUserid(AdminService.UserID));
 	  }
 
 

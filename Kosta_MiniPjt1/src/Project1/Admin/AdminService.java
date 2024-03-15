@@ -121,4 +121,9 @@ public class AdminService {
     int grade = sc.nextInt();
     dao.update(new Admin(id, pw, 0, grade));
   }
+  
+  // 로그인 등급 구분
+  public int selectGrade() {
+	  return dao.select(UserID).getGrade();
+  }
 }

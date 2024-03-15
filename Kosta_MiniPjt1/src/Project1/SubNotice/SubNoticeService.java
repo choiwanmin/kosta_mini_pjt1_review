@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Project1.Notice.Notice;
+import Project1.Notice.NoticeDao;
 import Project1.Nuser.NuserDao;
 import Project1.Nuser.NuserService;
 
@@ -11,11 +12,13 @@ public class SubNoticeService {
 	private SubNoticeDao dao;
 	private NuserService ns;
 	private NuserDao ndao;
+	private NoticeDao ntdao;
 	private NuserDao un;
 	private Notice no;
 	public SubNoticeService() {
 		dao = new SubNoticeDao();
 		ndao = new NuserDao();
+		ntdao = new NoticeDao();
 	}
 	
 	
@@ -38,8 +41,8 @@ public class SubNoticeService {
 	}
 	
 
-	//등록된 지원자 현황 출력 
-	public void viewAll() {
+	//기업이 등록된 지원자 현황 출력 
+	public void viewUser() {
 		int cnt = 1;
 		System.out.println("=== 지원자 현황  조회(전체 목록) ===");
 		ArrayList<SubNotice> list = dao.selectAll();
@@ -56,4 +59,9 @@ public class SubNoticeService {
 			}
 		}
 	}
+	
+	//지원자가 제출한 기업 정보 출력
+		public void viewCompany() {
+			
+		}
 }

@@ -3,11 +3,16 @@ package Project1.Notice;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Project1.Admin.AdminService;
+import Project1.Company.CompanyDao;
+
 public class NoticeService {
 	private Notice no;
 	private NoticeDao dao;
+	private CompanyDao cdao;
 	public NoticeService() {
 		dao = new NoticeDao();
+		cdao = new CompanyDao();
 	}
 	
 	
@@ -26,20 +31,25 @@ public class NoticeService {
 	
 	//공고 삭제
 	
-	public void delNotice (int com_id) {
+	public void delNotice (Scanner sc) {
 		System.out.println("=== 공고 삭제 ===");
+		int com_id = sc.nextInt();
 		dao.delete(com_id);
 	}
 	
 	
 	//공고 수정
-	public void editNotice(Scanner sc, int com_id) {
+	public void editNotice(Scanner sc) {
 		System.out.println("=== 공고 수정 ===");
+		getAll();
+		System.out.println("===============");
+		System.out.print("변경할 공고번호 선택 : ");
+		int com_id = sc.nextInt();
 		System.out.print("new 연봉 : ");
 		int salary = sc.nextInt();
 		System.out.print("new 직무 : ");
 		String job = sc.next();
-		dao.update(new Notice(0,com_id,null ,salary,job));
+		dao.update(new Notice(0, com_id,null ,salary,job));
 	}
 	
 	//공고 번호로 검색
