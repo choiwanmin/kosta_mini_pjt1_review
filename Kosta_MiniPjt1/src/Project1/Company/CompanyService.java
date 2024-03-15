@@ -3,6 +3,8 @@ package Project1.Company;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Project1.Admin.AdminService;
+
 public class CompanyService {
 	CompanyDao dao;
 
@@ -50,8 +52,7 @@ public class CompanyService {
 		System.out.print("수정할 기업주소:");
 		String addr = sc.next();
 		Company p = new Company(0, 0, cname, field, "null", tell, email, addr);
-		int cnum = p.getCnum();
-		int cnt = dao.updateCompany(p, cnum);
+		int cnt = dao.updateCompany(p, AdminService.UserID);
 		if (cnt > 0) {
 			System.out.println("기업 수정 완료");
 		} else {
@@ -62,14 +63,18 @@ public class CompanyService {
 	// 기업 삭제
 	public void deleteCompany(Scanner sc) {
 		System.out.println("===기업 삭제===");
-		System.out.print("삭제할 기업번호:");
-		int cnum = sc.nextInt();
-		int cnt = dao.deleteCompany(cnum);
-		if (cnt > 0) {
+		System.out.print("기업정보를 삭제하시겠습니까? 1.삭제 2.취소:");
+		int x = sc.nextInt();
+		if(x==1) {
+			dao.deleteCompany(AdminService.UserID);
 			System.out.println("기업 삭제 완료");
-		} else {
-			System.out.println("기업 삭제 실패");
+		}else if(x==2){
+			System.out.println("기업 삭제 취소");
+		}else {
+			System.out.println("잘못된 입력입니다");
 		}
+		
+		
 	}
 
 	// 기업 정보 조회 (분야)
