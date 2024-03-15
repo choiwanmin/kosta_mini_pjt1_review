@@ -1,6 +1,4 @@
-### Kosta mini project.
-
-**주제**
+#### Kosta mini project.
 
 
 ## 채용공고 사이트
