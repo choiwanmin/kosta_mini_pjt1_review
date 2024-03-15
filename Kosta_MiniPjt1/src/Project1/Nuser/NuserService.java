@@ -29,12 +29,14 @@ public class NuserService {
 	    String tel = sc.next();
 	    System.out.print("메일주소 : ");
 	    String email = sc.next();
+	    System.out.print("주소 : ");
+	    String addr = sc.next();
 	    System.out.print("경력 : ");
-	    String career = sc.nextLine();
+	    String career = sc.next();
 	    System.out.print("자격증 : ");
 	    String license = sc.next();
 
-	    ndao.insert(new Nuser(0,0, name, edu, id, tel, email, career ,license));
+	    ndao.insert(new Nuser(0,0, name, edu, id, tel, email, addr, career ,license), 2);
 	  }
 
 	  // 회원정보 수정
@@ -50,12 +52,14 @@ public class NuserService {
 	    String tel = sc.next();
 	    System.out.print("메일주소 : ");
 	    String email = sc.next();
+	    System.out.print("주소 : ");
+	    String addr = sc.next();
 	    System.out.print("경력 : ");
 	    String career = sc.nextLine();
 	    System.out.print("자격증 : ");
 	    String license = sc.next();
 
-	    ndao.update(new Nuser(0,0, name, edu, id, tel, email, career ,license));
+	    ndao.update(new Nuser(0,0, name, edu, id, tel, email, addr,career ,license));
 	  }
 
 	  // 회원정보 삭제
@@ -72,7 +76,8 @@ public class NuserService {
 	  // 회원정보 조회
 	  public void selectUser() {
 	    System.out.println("내 정보 확인");
-	    System.out.println(ndao.select(AdminService.UserID));
+//	    System.out.println(ndao.select(AdminService.UserID));
+	    System.out.println(ndao.select(2));
 	  }
 
 
@@ -93,7 +98,7 @@ public class NuserService {
 		String submit = sc.next();
 
 		// 첫번째 파람으로 unum을 받아 오는 NuserDao 필요할지??
-		idao.insert(new Intro(0, title, content, 0, submit));
+		idao.insert(new Intro(0, title, content, 0, submit), 2);
 	}
 
 	// 이력서 수정

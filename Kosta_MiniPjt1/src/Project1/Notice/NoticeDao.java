@@ -18,12 +18,12 @@ public class NoticeDao {
 
 	}
 
-	public void insert(Notice n) {
+	public void insert(Notice n,int id) {
 		Connection conn = db.conn();
-		String sql = "insert into notice values(?, seq1.nextval, sysdate, ?, ?)";
+		String sql = "insert into notice values(?, seq_no.nextval, sysdate, ?, ?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, n.getcNum());
+			pstmt.setInt(1, id);
 			pstmt.setInt(2, n.getSalary());
 			pstmt.setString(3, n.getJob());
 			int cnt = pstmt.executeUpdate();
@@ -44,7 +44,7 @@ public class NoticeDao {
 	
 	public Notice select(int com_id) {
 		Connection conn = db.conn();
-		String sql = "select * from board where com_id=?";
+		String sql = "select * from notice where com_id=?";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -71,11 +71,11 @@ public class NoticeDao {
 	//직무 이름으로 검색.
 	public ArrayList<Notice> selectByJob(String job) {
 		Connection conn = db.conn();
-		String sql = "select * from notice where job like ? order by num";
+		String sql = "select * from notice where job like ? order by com_id";
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + job + "%");
+			pstmt.setString(1, "%"+ job + "%");
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {// rs.next():읽을 줄로 이동을 해서 읽을 값이 있으면 true, 없으면 false
 				list.add(new Notice(rs.getInt(1),rs.getInt(2),rs.getDate(3),rs.getInt(4),rs.getString(5)));
@@ -98,11 +98,12 @@ public class NoticeDao {
 	
 	public ArrayList<Notice> selectAll(){
 		Connection conn = db.conn();
-		String sql = "select * from board order by com_id";
+		String sql = "select * from notice order by com_id";
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
+			
 			while (rs.next()) {// rs.next():읽을 줄로 이동을 해서 읽을 값이 있으면 true, 없으면 false
 				list.add(new Notice(rs.getInt(1),rs.getInt(2),rs.getDate(3),rs.getInt(4),rs.getString(5)));
 			}
@@ -124,11 +125,12 @@ public class NoticeDao {
 	
 	public void update(Notice n) {
 		Connection conn = db.conn();
-		String sql = "update notice set period=? where com_id=?";
+		String sql = "update notice set salary=?,job =? where com_id=?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setDate(1, n.getPeriod());
-			pstmt.setInt(2, n.getCom_id());
+			pstmt.setInt(1, n.getSalary());
+			pstmt.setString(2, n.getJob());
+			pstmt.setInt(3, n.getCom_id());
 			int cnt = pstmt.executeUpdate();
 			System.out.println(cnt + " 줄 수정됨");
 		} catch (SQLException e) {
@@ -147,7 +149,7 @@ public class NoticeDao {
 	
 	public void delete(int com_id) {
 		Connection conn = db.conn();
-		String sql = "delete board where com_id=?";
+		String sql = "delete notice where com_id=?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, com_id);

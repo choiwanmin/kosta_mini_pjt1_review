@@ -1,11 +1,10 @@
 package Project1.Intro;
 
+import java.util.Scanner;
+
 import Project1.Admin.AdminService;
 import Project1.Nuser.Nuser;
 import Project1.Nuser.NuserDao;
-
-import java.net.Socket;
-import java.util.Scanner;
 
 public class UserService {
   private IntroDao idao;
@@ -29,12 +28,14 @@ public class UserService {
     String tel = sc.next();
     System.out.print("메일주소 : ");
     String email = sc.next();
+    System.out.print("주소 : ");
+    String addr = sc.next();
     System.out.print("경력 : ");
     String career = sc.nextLine();
     System.out.print("자격증 : ");
     String license = sc.next();
 
-    ndao.insert(new Nuser(0,0, name, edu, id, tel, email, career ,license));
+    ndao.insert(new Nuser(0,0, name, edu, id, tel, email, addr, career ,license), 2);
   }
 
   // 회원정보 수정

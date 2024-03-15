@@ -18,19 +18,21 @@ public class NuserDao {
    * int userid, int unum, String name, String edu, String id, String tell
    * String email, String career, String license
    */
-  public void insert(Nuser n){
+  public void insert(Nuser n, int id){
     Connection conn =db.conn();
-    String sql = "insert into nuser values(0, seq_unum.nextval, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "insert into nuser values(?, seq_unum.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
     int cnt = 0;
     try {
       PreparedStatement pstmt = conn.prepareStatement(sql);
-      pstmt.setString(1, n.getName()); // name
-      pstmt.setString(2, n.getEdu()); // edu
-      pstmt.setString(3, n.getId()); // id
-      pstmt.setString(4, n.getTell()); // tell
-      pstmt.setString(5, n.getEmail()); // email
-      pstmt.setString(6, n.getCareer()); // career
-      pstmt.setString(7, n.getLicense()); // license
+      pstmt.setInt(1, id); // userid
+      pstmt.setString(2, n.getName()); // name
+      pstmt.setString(3, n.getEdu()); // edu
+      pstmt.setString(4, n.getId()); // id
+      pstmt.setString(5, n.getTell()); // tell
+      pstmt.setString(6, n.getEmail()); // email
+      pstmt.setString(7, n.getAddr()); // addr
+      pstmt.setString(8, n.getCareer()); // career
+      pstmt.setString(9, n.getLicense()); // license
       cnt = pstmt.executeUpdate();
       System.out.println(cnt + " 줄 추가됨.");
     } catch (SQLException e) {
@@ -103,7 +105,7 @@ public class NuserDao {
       if(rs.next()) {
         return new Nuser(rs.getInt(1), rs.getInt(2), rs.getString(3),
             rs.getString(4),rs.getString(5), rs.getString(6),
-            rs.getString(7), rs.getString(8), rs.getString(9));
+            rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
       }
     } catch (SQLException e) {
       e.printStackTrace();

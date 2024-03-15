@@ -34,10 +34,11 @@ public class AdminDao {
   // 삭제
   public void delete(int num){
     Connection conn =db.conn();
-    String sql = "delete admin where userd = ?";
+    String sql = "delete admin where userid = ?";
     int cnt = 0;
     try {
       PreparedStatement pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, num);
       cnt = pstmt.executeUpdate();
       System.out.println(cnt + " 줄 삭제됨.");
     } catch (SQLException e) {
@@ -59,7 +60,7 @@ public class AdminDao {
     try {
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, num);
-      ResultSet rs = pstmt.getResultSet();
+      ResultSet rs = pstmt.executeQuery();
       if (rs.next()){
         return new Admin(rs.getString(1), rs.getString(2),
             rs.getInt(3), rs.getInt(4));

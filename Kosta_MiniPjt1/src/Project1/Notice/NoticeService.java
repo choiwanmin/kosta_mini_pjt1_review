@@ -20,7 +20,7 @@ public class NoticeService {
 		int salary = sc.nextInt();
 		System.out.println("직무를 등록해 주세요 : ");
 		String job = sc.next();
-		dao.insert(new Notice(0,0,null,salary,job));
+		dao.insert(new Notice(0,0,null,salary,job),22);
 	}
 	
 	
@@ -36,11 +36,10 @@ public class NoticeService {
 	public void editNotice(Scanner sc, int com_id) {
 		System.out.println("=== 공고 수정 ===");
 		System.out.print("new 연봉 : ");
-		sc.nextLine();
 		int salary = sc.nextInt();
 		System.out.print("new 직무 : ");
 		String job = sc.next();
-		dao.update(new Notice(0,com_id,null,salary,job));
+		dao.update(new Notice(0,com_id,null ,salary,job));
 	}
 	
 	//공고 번호로 검색
@@ -53,7 +52,7 @@ public class NoticeService {
 			System.out.println("없는 글번호");
 		} else {
 			System.out.println(n);
-			if (no.getcNum()==n.getcNum()) {
+			if (no.getcNum() == n.getcNum()) {
 				System.out.println("1.수정 2.삭제 3.상세페이지종료");
 				int x = sc.nextInt();
 				switch (x) {
