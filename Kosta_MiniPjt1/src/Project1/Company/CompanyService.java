@@ -85,8 +85,8 @@ public class CompanyService {
 			System.out.println("조회된 기업 없음");
 		} else {
 			for (Company c : list) {
-				System.out.println("기업이름: " + c.getCname() + " 기업분야: " + c.getField() + " 기업 전화번호: " + c.getTell()
-						+ " 기업 이메일: " + c.getEmail() + " 기업주소: " + c.getAddr());
+				System.out.println("기업이름: " + c.getCname() + ", 기업분야: " + c.getField() + ", 기업 전화번호: " + c.getTell()
+						+ "\n , 기업 이메일: " + c.getEmail() + ", 기업주소: " + c.getAddr());
 			}
 		}
 	}
@@ -99,8 +99,8 @@ public class CompanyService {
 			System.out.println("조회된 기업 없음");
 		} else {
 			for (Company c : list) {
-				System.out.println("기업이름 : " + c.getCname() + " 기업분야 : " + c.getField() + " 기업 전화번호 : " + c.getTell()
-						+ " 기업 이메일 : " + c.getEmail() + " 기업주소 : " + c.getAddr());
+				System.out.println("기업이름: " + c.getCname() + ", 기업분야: " + c.getField() + ", 기업 전화번호: " + c.getTell()
+				+ "\n , 기업 이메일: " + c.getEmail() + ", 기업주소: " + c.getAddr());
 			}
 		}
 
