@@ -1,9 +1,9 @@
-###Kosta mini project.
+### Kosta mini project.
 
 **주제**
 
 
-##채용공고 사이트
+## 채용공고 사이트
 
 
 **팀원**
