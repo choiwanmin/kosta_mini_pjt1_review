@@ -57,9 +57,9 @@ public class Menu {
 	public void runUser(Scanner sc) {
 		boolean flag = true;
 		while(flag) {
-			System.out.println("1.내정보등록  2.내정보수정  3.내정보확인  4.회원탈퇴\n"
-					+ "5.이력서 등록  6.이력서 수정  7.이력서 삭제  8.이력서 조회 \n"
-					+ "9.기업정보조회 10.기업전체조회  11.종료");
+			System.out.println("1.내정보등록    2.내정보수정    3.내정보확인   4.회원탈퇴\n"
+					         + "5.이력서 등록   6.이력서 수정   7.이력서 삭제  8.이력서 조회 \n"
+					         + "9.기업정보조회  10.기업전체조회  11.종료");
 			int m = sc.nextInt();
 			switch(m) {
 			case 1:
@@ -114,6 +114,8 @@ public class Menu {
 		}
 	}
 	
+	
+	
 	// 기업회원 기능
 	public void runCompany(Scanner sc) {
 		boolean flag = true;
@@ -165,6 +167,7 @@ public class Menu {
 		}
 	}
 	
+
 	// 관리자 기능
 	public void runAdmin(Scanner sc) {
 		boolean flag = true;
