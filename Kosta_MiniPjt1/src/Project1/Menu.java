@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import Project1.Admin.AdminService;
 import Project1.Company.CompanyService;
-import Project1.Intro.UserService;
 import Project1.Notice.NoticeService;
 import Project1.Nuser.NuserService;
 import Project1.SubNotice.SubNoticeService;
