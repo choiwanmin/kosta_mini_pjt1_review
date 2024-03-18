@@ -146,7 +146,7 @@ public class NuserService {
 			Nuser nuser = ndao.select(i.getUnum());
 			// 로그인 아이디 unum과 이력서 작성자 unum이 같으면 수정삭제 가능?
 			if (AdminService.UserID == nuser.getUserid()) {
-				System.out.println("1.내이력서수정  2.내이력서삭제  3.내이력서페이지 종료");
+				System.out.println("1.내이력서수정  2.내이력서삭제  3.나가기");
 				int x = sc.nextInt();
 				switch (x) {
 				case 1:

@@ -9,18 +9,9 @@ import Project1.SubNotice.SubNoticeService;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		
 		Scanner sc = new Scanner(System.in);
-
-		NoticeService n = new NoticeService();
-		SubNoticeService s = new SubNoticeService();
 		Menu m = new Menu();
 		m.run(sc);
-
-		
-		
 		
 	}
 

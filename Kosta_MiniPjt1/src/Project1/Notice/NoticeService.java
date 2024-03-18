@@ -64,14 +64,14 @@ public class NoticeService {
 		} else {
 			System.out.println(n);
 			if (no.getcNum() == n.getcNum()) {
-				System.out.println("1.수정 2.삭제 3.상세페이지종료");
+				System.out.println("1.수정  02.삭제  3.상세페이지종료");
 				int x = sc.nextInt();
 				switch (x) {
 				case 1:
-					editNotice(sc, com_id);
+					editNotice(sc); // error
 					break;
 				case 2:
-					delNotice(com_id);
+					delNotice(sc); // error
 					break;
 				}
 			}

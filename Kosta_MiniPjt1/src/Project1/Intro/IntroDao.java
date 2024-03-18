@@ -74,7 +74,6 @@ public class IntroDao {
 	// 이력서 삭제
 	public void delete(int id) {
 		Connection conn = db.conn();
-
 		String sql = "delete from intro where id=?";
 
 		try {
@@ -145,6 +144,24 @@ public class IntroDao {
 		}
 		return list;
 	}
+
+	// 이력서 조회(기업번호)
+	public ArrayList<Intro> selectByCom(int cnum){
+		Connection conn = db.conn();
+		String sql = "select * from intro where cnum = ?";
+		ArrayList<Intro> list = new ArrayList<>();
+    try {
+      PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cnum);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()){
+				list.add(new Intro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)));
+			}
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+		return list;
+  }
 	
 	// 이력서 조회(전체)
 	public ArrayList<Intro> selectAll() {
