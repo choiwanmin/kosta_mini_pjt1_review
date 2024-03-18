@@ -62,7 +62,7 @@ public class CompanyService {
 	// 기업회원탈퇴
 	public void deleteCompany(Scanner sc) {
 		System.out.println("===기업회원탈퇴===");
-		System.out.print("기업정보를 삭제하시겠습니까? 1.삭제 2.취소:");
+		System.out.print("기업정보를 삭제하시겠습니까? 1.삭제  2.취소:");
 		int x = sc.nextInt();
 		if (x == 1) {
 			dao.deleteCompany(AdminService.UserID);

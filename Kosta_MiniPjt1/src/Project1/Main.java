@@ -28,7 +28,7 @@ public class Main {
 //		s.addSub(2, 5);
 		
 		
-		s.viewAll();
+//		s.viewAll();
 		
 		
 		
