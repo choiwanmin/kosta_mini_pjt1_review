@@ -2,9 +2,6 @@ package Project1;
 
 import java.util.Scanner;
 
-import Project1.Notice.NoticeService;
-import Project1.SubNotice.SubNoticeService;
-
 
 public class Main {
 

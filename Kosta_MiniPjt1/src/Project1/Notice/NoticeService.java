@@ -1,46 +1,56 @@
 package Project1.Notice;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Project1.Admin.AdminService;
 import Project1.Company.CompanyDao;
 
 public class NoticeService {
 	private Notice no;
 	private NoticeDao dao;
 	private CompanyDao cdao;
+
 	public NoticeService() {
 		dao = new NoticeDao();
 		cdao = new CompanyDao();
 	}
-	
-	
-	
-	//공고 등록	
-	
+
+	// 공고 등록
+
 	public void addNotice(Scanner sc) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		System.out.println("=== 공고 등록 ===");
 		System.out.println("연봉을 등록하세요 : ");
 		int salary = sc.nextInt();
 		System.out.println("직무를 등록해 주세요 : ");
 		String job = sc.next();
-		dao.insert(new Notice(0,0,null,salary,job),22);
+		System.out.println("마감일을 작성해주세요(년-월-일) : ");
+		String deadline = sc.next();
+		java.util.Date date;
+		try {
+				date = formatter.parse(deadline);
+			    java.sql.Date sqldate = new java.sql.Date(date.getTime());
+			    dao.insert(new Notice(0, 0, null, salary, job, sqldate), 22);
+			} catch (ParseException e) {
+				 System.out.println("잘못된 날짜 형식입니다. 년-월-일 형식으로 입력해주세요.");
+				e.printStackTrace();
+			}
 	}
-	
-	
-	//공고 삭제
-	
-	public void delNotice (Scanner sc) {
+
+	// 공고 삭제
+
+	public void delNotice(Scanner sc) {
 		System.out.println("=== 공고 삭제 ===");
 		System.out.print("삭제할 공고번호:");
 		int com_id = sc.nextInt();
 		dao.delete(com_id);
 	}
-	
-	
-	//공고 수정
+
+	// 공고 수정
 	public void editNotice(Scanner sc) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		System.out.println("=== 공고 수정 ===");
 		getAll();
 		System.out.println("===============");
@@ -50,10 +60,20 @@ public class NoticeService {
 		int salary = sc.nextInt();
 		System.out.print("new 직무 : ");
 		String job = sc.next();
-		dao.update(new Notice(0, com_id,null ,salary,job));
+		System.out.println("new 마감일(년-월-일) : ");
+		String deadline = sc.next();
+		java.util.Date date;
+		try {
+				date = formatter.parse(deadline);
+			    java.sql.Date sqldate = new java.sql.Date(date.getTime());
+			    dao.update(new Notice(0, 0, null, salary, job,sqldate), com_id);
+			} catch (ParseException e) {
+				 System.out.println("잘못된 날짜 형식입니다. 년-월-일 형식으로 입력해주세요.");
+				e.printStackTrace();
+			}
 	}
-	
-	//공고 번호로 검색
+
+	// 공고 번호로 검색
 	public void getByNum(Scanner sc) {
 		System.out.println("=== 번호로 검색 ===");
 		System.out.print("num : ");
@@ -77,9 +97,8 @@ public class NoticeService {
 			}
 		}
 	}
-	
-	
-	//공고 직무별 검색
+
+	// 공고 직무별 검색
 	public void getByJob(Scanner sc) {
 		System.out.println("=== 직무별 검색 ===");
 		System.out.print("검색할 직무를 입력하세요 : ");
@@ -93,8 +112,8 @@ public class NoticeService {
 			}
 		}
 	}
-	
-	//전체 공고 보기
+
+	// 전체 공고 보기
 	public void getAll() {
 		System.out.println("=== 글목록 ===");
 		ArrayList<Notice> list = dao.selectAll();
@@ -106,5 +125,5 @@ public class NoticeService {
 			}
 		}
 	}
-	
+
 }

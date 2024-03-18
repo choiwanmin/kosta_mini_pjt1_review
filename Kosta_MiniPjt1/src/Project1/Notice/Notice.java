@@ -1,6 +1,6 @@
 package Project1.Notice;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Notice {
 	private int cNum;
@@ -8,17 +8,19 @@ public class Notice {
 	private Date period;
 	private int salary;
 	private String job;
+	private java.sql.Date deadLine;
 
 	public Notice() {
 	}
 
-	public Notice(int cNum, int com_id, Date period, int salary, String job) {
+	public Notice(int cNum, int com_id, Date period, int salary, String job, java.sql.Date deadLine) {
 		super();
 		this.cNum = cNum;
 		this.com_id = com_id;
 		this.period = period;
 		this.salary = salary;
 		this.job = job;
+		this.deadLine = deadLine;
 	}
 
 	public int getcNum() {
@@ -61,11 +63,29 @@ public class Notice {
 		this.job = job;
 	}
 
+	public java.sql.Date getDeadLine() {
+		return deadLine;
+	}
+
+	public void setDeadLine(java.sql.Date deadLine) {
+		this.deadLine = deadLine;
+	}
+
 	@Override
 	public String toString() {
 		return "Notice [cNum=" + cNum + ", com_id=" + com_id + ", period=" + period + ", salary=" + salary + ", job="
-				+ job + "]";
+				+ job + ", deadLine=" + deadLine + "]";
 	}
+
+
+
+	
+
+	
+
+	
+
+	
 
 	
 }
