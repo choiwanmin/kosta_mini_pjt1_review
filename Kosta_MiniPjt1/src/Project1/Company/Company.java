@@ -91,10 +91,11 @@ public class Company {
 		this.addr = addr;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Company [userId=" + userId + ", cnum=" + cnum + ", cname=" + cname + ", field=" + field + ", id=" + id
-				+ ", tell=" + tell + ", email=" + email + ", addr=" + addr + "]";
+		return "Company [사용자아이디=" + userId + ", 회사번호=" + cnum + ", 회사이름=" + cname + ", 회사분류=" + field + ", 사업자번호=" + id
+				+ ", 회사전화번호=" + tell + ", 회사이메일=" + email + ", 회사주소=" + addr + "]";
 	}
 	
 	
