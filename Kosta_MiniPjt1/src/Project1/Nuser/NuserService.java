@@ -114,7 +114,7 @@ public class NuserService {
 		String content = sc.next();
 		// 제출한 회사까지 수정 가능해야 하는가?
 		Nuser nuser = ndao.select(AdminService.UserID);
-		int cnt = idao.update(new Intro(nuser.getUnum(), title, content, id, 0));
+		int cnt = idao.update(new Intro(nuser.getUnum(), title, content, id, 0), id);
 		if (cnt > 0) {
 			System.out.println(id + "번 이력서 수정 완료");
 		} else {
