@@ -27,11 +27,15 @@ public class Menu {
 				break;
 			case 2:
 				runLogin(sc);
+				 flag = false;
 				break;
 			case 3:
 				System.out.println("종료");
 				flag = false;
-				return;
+				break;
+			default:
+                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                break;
 			}
 		}
 	}
@@ -41,6 +45,7 @@ public class Menu {
 		boolean flag = true;
 		while (flag) {
 			if(aservice.login(sc)) {
+				flag= false;
 				if(aservice.selectGrade() == 1) {
 					runUser(sc);
 				}else if(aservice.selectGrade()==2){
@@ -48,7 +53,10 @@ public class Menu {
 				}else if(aservice.selectGrade()==0){
 					runAdmin(sc);
 				}
-			}		
+			}else {
+	            System.out.println("로그인에 실패했습니다. 다시 시도하세요.");		
+	            flag = false;
+			}
 		}
 	}
 	
