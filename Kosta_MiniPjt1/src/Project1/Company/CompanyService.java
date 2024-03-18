@@ -78,7 +78,7 @@ public class CompanyService {
 	// 기업 정보 조회 (분야)
 	public void printCompanyByFiled(Scanner sc) {
 		System.out.println("===기업정보 조회(분야)===");
-		System.out.print("찾을 분야:");
+		System.out.print("찾을 분야:"); 
 		String field = sc.next();
 		ArrayList<Company> list = dao.selectCompanyByField(field);
 		if (list.isEmpty()) {
