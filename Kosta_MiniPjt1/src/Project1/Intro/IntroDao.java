@@ -19,14 +19,15 @@ public class IntroDao {
 	public void insert(Intro i, int num) {
 		Connection conn = db.conn();
 
-		String sql = "insert into intro values(?,?,?,seq_intro.nextval,?)";
+		String sql = "insert into intro values(?,?,?,?,?)";
 
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, i.getTitle());
 			pstmt.setString(3, i.getContent());
-			pstmt.setInt(4, i.getCnum());
+			pstmt.setInt(4, i.getId());
+			pstmt.setInt(5, i.getCnum());
 
 			int cnt = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -44,15 +45,16 @@ public class IntroDao {
 	}
 	
 	// 이력서 수정 - 제목, 내용, 제출 회사
-	public int update(Intro i) {
+	public int update(Intro i, int id) {
 		Connection conn = db.conn();
 
-		String sql = "update intro set title=?, content=?";
+		String sql = "update intro set title=?, content=? where id=?";
 		int cnt = 0;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, i.getTitle());
 			pstmt.setString(2, i.getContent());
+			pstmt.setInt(3, id);
 
 			cnt = pstmt.executeUpdate();
 		} catch (SQLException e) {

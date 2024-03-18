@@ -23,8 +23,8 @@ public class Nuser {
 
 	@Override
 	public String toString() {
-		return "Nuser [userid=" + userid + ", unum=" + unum + ", name=" + name + ", edu=" + edu + ", id=" + id
-				+ ", tell=" + tell + ", email=" + email + ", addr=" + addr + ", career=" + career + ", license="
+		return "[개인회원아이디=" + userid + ", 개인회원번호=" + unum + ", 이름=" + name + ", 학력=" + edu + ", 주민등록번호=" + id
+				+ ", 전화번호=" + tell + ", 이메일=" + email + ", 주소=" + addr + ", 경력=" + career + ", 자격증="
 				+ license + "]";
 	}
 

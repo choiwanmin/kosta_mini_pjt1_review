@@ -19,7 +19,7 @@ public class Menu {
 	public void run(Scanner sc) {
 		boolean flag = true;
 		while (flag) {
-			System.out.println("1.회원 가입  2.로그인  3.종료");
+			System.out.println("1.회원가입  2.로그인  3.종료");
 			int m = sc.nextInt();
 			switch (m) {
 			case 1:
@@ -49,7 +49,7 @@ public class Menu {
 			}
 		}
 	}
-	
+
 	// 일반회원 기능
 	// 메뉴 줄맞춤.
 	public void runUser(Scanner sc) {
@@ -57,9 +57,8 @@ public class Menu {
 		while(flag) {
 			System.out.println("1.내정보등록    2.내정보수정    3.내정보확인    4.회원탈퇴\n"
 					             + "5.이력서 관리   6.기업정보조회  7.기업전체조회  8.종료");
-
 			int m = sc.nextInt();
-			switch(m) {
+			switch (m) {
 			case 1:
 				nuservice.addUser(sc);
 				break;
@@ -90,7 +89,7 @@ public class Menu {
 			}
 		}
 	}
-	
+  
 	// 일반회원 이력서 관리
 	public void runIntro(Scanner sc){
 		boolean flag = true;
@@ -141,7 +140,7 @@ public class Menu {
 			System.out.println("1.정보등록  2.정보수정  3.내정보확인 \n"+
 					  				     "4.회원탈퇴  5.공고관리  6.종료");
 			int m = sc.nextInt();
-			switch(m) {
+			switch (m) {
 			case 1:
 				cservice.addCompany(sc);
 				break;
@@ -215,7 +214,6 @@ public class Menu {
 			}
 		}
 	}
-	
 
 	// 관리자 기능
 	public void runAdmin(Scanner sc) {
@@ -223,7 +221,7 @@ public class Menu {
 		while(flag) {
 			System.out.println("1.회원전체출력  2.회원정보수정  3.회원 조회  4.회원 삭제  5.종료");
 			int m = sc.nextInt();
-			switch(m) {
+			switch (m) {
 			case 1:
 				aservice.selectAllUser();
 				break;
