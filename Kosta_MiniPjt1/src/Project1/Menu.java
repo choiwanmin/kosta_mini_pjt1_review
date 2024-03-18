@@ -19,7 +19,7 @@ public class Menu {
 	public void run(Scanner sc) {
 		boolean flag = true;
 		while (flag) {
-			System.out.println("1.회원 가입 2.로그인 3.종료");
+			System.out.println("1.회원 가입  2.로그인  3.종료");
 			int m = sc.nextInt();
 			switch (m) {
 			case 1:
@@ -51,11 +51,13 @@ public class Menu {
 	}
 	
 	// 일반회원 기능
+	// 메뉴 줄맞춤.
 	public void runUser(Scanner sc) {
 		boolean flag = true;
 		while(flag) {
 			System.out.println("1.내정보등록    2.내정보수정    3.내정보확인    4.회원탈퇴\n"
 					             + "5.이력서 관리   6.기업정보조회  7.기업전체조회  8.종료");
+
 			int m = sc.nextInt();
 			switch(m) {
 			case 1:
@@ -132,6 +134,7 @@ public class Menu {
 	}
 	
 	// 기업회원 기능
+	//메뉴 줄맞춤
 	public void runCompany(Scanner sc) {
 		boolean flag = true;
 		while(flag) {
@@ -218,7 +221,7 @@ public class Menu {
 	public void runAdmin(Scanner sc) {
 		boolean flag = true;
 		while(flag) {
-			System.out.println("1.회원전체출력  2.회원정보 수정  3.회원 조회  4.회원 삭제  5.종료");
+			System.out.println("1.회원전체출력  2.회원정보수정  3.회원 조회  4.회원 삭제  5.종료");
 			int m = sc.nextInt();
 			switch(m) {
 			case 1:
