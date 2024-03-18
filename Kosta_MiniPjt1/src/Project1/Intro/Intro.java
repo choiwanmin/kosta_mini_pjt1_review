@@ -5,18 +5,24 @@ public class Intro {
 	private String title;
 	private String content;
 	private int id;
-	private String submit;
+	private int cnum;
 
 	public Intro() {
 	}
 
-	public Intro(int unum, String title, String content, int id, String submit) {
+	public Intro(int unum, String title, String content, int id, int cnum) {
 		super();
 		this.unum = unum;
 		this.title = title;
 		this.content = content;
 		this.id = id;
-		this.submit = submit;
+		this.cnum = cnum;
+	}
+
+	@Override
+	public String toString() {
+		return "Intro [unum=" + unum + ", title=" + title + ", content=" + content + ", id=" + id + ", cnum=" + cnum
+				+ "]";
 	}
 
 	public int getUnum() {
@@ -51,18 +57,12 @@ public class Intro {
 		this.id = id;
 	}
 
-	public String getSubmit() {
-		return submit;
+	public int getCnum() {
+		return cnum;
 	}
 
-	public void setSubmit(String submit) {
-		this.submit = submit;
-	}
-
-	@Override
-	public String toString() {
-		return "Intro [unum=" + unum + ", title=" + title + ", content=" + content + ", id=" + id + ", submit="
-				+ submit + "]";
+	public void setCnum(int cnum) {
+		this.cnum = cnum;
 	}
 
 }

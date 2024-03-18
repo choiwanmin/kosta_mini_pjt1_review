@@ -26,7 +26,7 @@ public class IntroDao {
 			pstmt.setInt(1, num);
 			pstmt.setString(2, i.getTitle());
 			pstmt.setString(3, i.getContent());
-			pstmt.setString(4, i.getSubmit());
+			pstmt.setInt(4, i.getCnum());
 
 			int cnt = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -47,13 +47,12 @@ public class IntroDao {
 	public int update(Intro i) {
 		Connection conn = db.conn();
 
-		String sql = "update intro set title=?, content=?, submit=?";
+		String sql = "update intro set title=?, content=?";
 		int cnt = 0;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, i.getTitle());
 			pstmt.setString(2, i.getContent());
-			pstmt.setString(3, i.getSubmit());
 
 			cnt = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -103,7 +102,7 @@ public class IntroDao {
 
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				return new Intro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
+				return new Intro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -129,7 +128,7 @@ public class IntroDao {
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				list.add(new Intro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
+				list.add(new Intro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -155,7 +154,7 @@ public class IntroDao {
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				list.add(new Intro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
+				list.add(new Intro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

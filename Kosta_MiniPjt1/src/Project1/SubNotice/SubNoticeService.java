@@ -24,7 +24,6 @@ public class SubNoticeService {
 	
 	
 	//지원자 등록
-	
 	public void addSub(int n, int o) {
 		System.out.println("=== 글작성 ===");
 //		int unum = n.getUnum();
@@ -40,8 +39,7 @@ public class SubNoticeService {
 		dao.delete(subnotice_id);
 	}
 	
-
-	//기업이 등록된 지원자 현황 출력 
+	//기업이 등록된 지원자 현황 출력
 	public void viewUser() {
 		int cnt = 1;
 		System.out.println("=== 지원자 현황  조회(전체 목록) ===");
@@ -60,8 +58,15 @@ public class SubNoticeService {
 		}
 	}
 	
-	//지원자가 제출한 기업 정보 출력
-		public void viewCompany() {
-			
-		}
+	// 지원자가 제출한 기업 정보 출력
+	public void viewCompany() {
+		System.out.println("");
+	}
+		
+	// 지원자가 공고보기
+	public void viewNotice() {
+		System.out.println("현재 올라온 공고");
+		ns.getAll();
+	}
+	
 }
