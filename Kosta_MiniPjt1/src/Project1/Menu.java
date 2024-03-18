@@ -41,7 +41,6 @@ public class Menu {
 	public void runLogin(Scanner sc) {
 		boolean flag = true;
 		while (flag) {
-			System.out.println("=== 로그인 ===");
 			if(aservice.login(sc)) {
 				if(aservice.selectGrade() == 1) {
 					runUser(sc);
