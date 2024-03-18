@@ -33,6 +33,7 @@ public class NoticeService {
 	
 	public void delNotice (Scanner sc) {
 		System.out.println("=== 공고 삭제 ===");
+		System.out.print("삭제할 공고번호:");
 		int com_id = sc.nextInt();
 		dao.delete(com_id);
 	}

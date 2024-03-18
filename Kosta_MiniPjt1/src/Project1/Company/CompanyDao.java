@@ -161,8 +161,8 @@ public class CompanyDao {
 			ps.setInt(1, userid);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				c = new Company(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(6),
-						rs.getString(7), rs.getString(8), rs.getString(9));
+				c = new Company(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getString(6), rs.getString(7), rs.getString(8));
 				return c;
 			}
 		} catch (SQLException e) {
