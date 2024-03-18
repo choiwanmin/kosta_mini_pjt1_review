@@ -20,7 +20,7 @@ public class Menu {
 	public void run(Scanner sc) {
 		boolean flag = true;
 		while (flag) {
-			System.out.println("1.회원 가입 2.로그인 3.종료");
+			System.out.println("1.회원가입  2.로그인  3.종료");
 			int m = sc.nextInt();
 			switch (m) {
 			case 1:
@@ -36,32 +36,31 @@ public class Menu {
 			}
 		}
 	}
-	
+
 	// 로그인 기능
 	public void runLogin(Scanner sc) {
 		boolean flag = true;
 		while (flag) {
-			if(aservice.login(sc)) {
-				if(aservice.selectGrade() == 1) {
+			if (aservice.login(sc)) {
+				if (aservice.selectGrade() == 1) {
 					runUser(sc);
-				}else if(aservice.selectGrade()==2){
+				} else if (aservice.selectGrade() == 2) {
 					runCompany(sc);
-				}else if(aservice.selectGrade()==0){
+				} else if (aservice.selectGrade() == 0) {
 					runAdmin(sc);
 				}
-			}		
+			}
 		}
 	}
-	
+
 	// 일반회원 기능
 	public void runUser(Scanner sc) {
 		boolean flag = true;
-		while(flag) {
-			System.out.println("1.내정보등록    2.내정보수정    3.내정보확인   4.회원탈퇴\n"
-					         + "5.이력서 등록   6.이력서 수정   7.이력서 삭제  8.이력서 조회 \n"
-					         + "9.기업정보조회  10.기업전체조회  11.종료");
+		while (flag) {
+			System.out.println("1.내정보등록   2.내정보수정     3.내정보확인   4.회원탈퇴\n" + "5.내이력서등록  6.내이력서수정   7.내이력서삭제  8.내이력서조회 \n"
+					+ "9.기업정보조회  10.기업전체조회  11.종료");
 			int m = sc.nextInt();
-			switch(m) {
+			switch (m) {
 			case 1:
 				nuservice.addUser(sc);
 				break;
@@ -86,7 +85,7 @@ public class Menu {
 			case 8:
 				System.out.println("1.전체조회  2.번호조회  3.제목조회");
 				int sel = sc.nextInt();
-				switch(sel) {
+				switch (sel) {
 				case 1:
 					nuservice.getAll();
 					break;
@@ -100,7 +99,7 @@ public class Menu {
 				break;
 			case 9:
 				cservice.printCompanyByFiled(sc);
-				break;				
+				break;
 			case 10:
 				cservice.printAllCompany();
 				break;
@@ -113,17 +112,14 @@ public class Menu {
 			}
 		}
 	}
-	
-	
-	
+
 	// 기업회원 기능
 	public void runCompany(Scanner sc) {
 		boolean flag = true;
-		while(flag) {
-			System.out.println("1.기업등록  2.기업수정  3.기업탈퇴 \n"
-					+ "4.공고등록  5.공고수정  6.공고검색  7.공고삭제  8.종료");
+		while (flag) {
+			System.out.println("1.기업등록  2.기업수정  3.기업탈퇴 \n" + "4.공고등록  5.공고수정  6.공고검색  7.공고삭제  8.종료");
 			int m = sc.nextInt();
-			switch(m) {
+			switch (m) {
 			case 1:
 				cservice.addCompany(sc);
 				break;
@@ -142,7 +138,7 @@ public class Menu {
 			case 6:
 				System.out.println("1.전체조회  2.번호조회  3.직무별조회");
 				int sel = sc.nextInt();
-				switch(sel) {
+				switch (sel) {
 				case 1:
 					noservice.getAll();
 					break;
@@ -166,15 +162,14 @@ public class Menu {
 			}
 		}
 	}
-	
 
 	// 관리자 기능
 	public void runAdmin(Scanner sc) {
 		boolean flag = true;
-		while(flag) {
+		while (flag) {
 			System.out.println("1.회원전체출력  2.회원정보 수정  3.회원 조회  4.회원 삭제  5.종료");
 			int m = sc.nextInt();
-			switch(m) {
+			switch (m) {
 			case 1:
 				aservice.selectAllUser();
 				break;
