@@ -68,10 +68,10 @@ public class NoticeService {
 				int x = sc.nextInt();
 				switch (x) {
 				case 1:
-					editNotice(sc, com_id);
+					editNotice(sc); // error
 					break;
 				case 2:
-					delNotice(com_id);
+					delNotice(sc); // error
 					break;
 				}
 			}
