@@ -113,13 +113,15 @@ public class AdminService {
   // 회원 정보 수정
   public void editUser(Scanner sc){
     System.out.println("=== 회원 정보 수정 ===");
+    System.out.println("수정할 대상 : ");
+    int userid = sc.nextInt();
     System.out.println("NEW ID : ");
     String id = sc.next();
     System.out.println("NEW PW : ");
     String pw = sc.next();
     System.out.println("NEW GRADE (0: admin, 1: general, 2: company): ");
     int grade = sc.nextInt();
-    dao.update(new Admin(id, pw, 0, grade));
+    dao.update(new Admin(id, pw, 0, grade), userid);
   }
   
   // 로그인 등급 구분

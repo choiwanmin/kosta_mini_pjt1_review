@@ -32,7 +32,7 @@ public class Menu {
 			case 3:
 				System.out.println("종료");
 				flag = false;
-				break;
+				return;
 			}
 		}
 	}
@@ -98,6 +98,7 @@ public class Menu {
 					nuservice.getByTitle(sc);
 					break;
 				}
+				break;
 			case 9:
 				cservice.printCompanyByFiled(sc);
 				break;				
@@ -105,8 +106,10 @@ public class Menu {
 				cservice.printAllCompany();
 				break;
 			case 11:
-				System.out.println("종료..");
+				System.out.println("로그아웃..");
 				flag = false;
+				aservice.UserID = 0;
+				run(sc);
 				break;
 			}
 		}
@@ -154,8 +157,10 @@ public class Menu {
 				noservice.delNotice(sc);
 				break;
 			case 8:
-				System.out.println("종료..");
+				System.out.println("로그아웃..");
 				flag = false;
+				aservice.UserID = 0;
+				run(sc);
 				break;
 			}
 		}
@@ -165,14 +170,14 @@ public class Menu {
 	public void runAdmin(Scanner sc) {
 		boolean flag = true;
 		while(flag) {
-			System.out.println("1.회원정보 수정  2.회원전체출력  3.회원 조회  4.회원 삭제  5.종료");
+			System.out.println("1.회원전체출력  2.회원정보 수정  3.회원 조회  4.회원 삭제  5.종료");
 			int m = sc.nextInt();
 			switch(m) {
 			case 1:
-				aservice.editUser(sc);
+				aservice.selectAllUser();
 				break;
 			case 2:
-				aservice.selectAllUser();
+				aservice.editUser(sc);
 				break;
 			case 3:
 				aservice.selectUser(sc);
@@ -181,8 +186,10 @@ public class Menu {
 				aservice.deleteUser(sc);
 				break;
 			case 5:
-				System.out.println("관리자기능 종료.");
+				System.out.println("로그아웃..");
 				flag = false;
+				aservice.UserID = 0;
+				run(sc);
 				break;
 			}
 		}
