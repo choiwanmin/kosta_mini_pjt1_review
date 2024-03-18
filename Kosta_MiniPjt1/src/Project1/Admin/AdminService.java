@@ -74,6 +74,7 @@ public class AdminService {
         System.out.println(a);
         System.out.println(cdao.selectCompany(a.getUserid()));
       }
+      System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
   }
 

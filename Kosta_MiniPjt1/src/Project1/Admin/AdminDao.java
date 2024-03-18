@@ -96,7 +96,7 @@ public class AdminDao {
 
 	public ArrayList<Admin> selectAll() {
 		Connection conn = db.conn();
-		String sql = "select * from admin";
+		String sql = "select * from admin order by grade, userid";
 		ArrayList<Admin> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
