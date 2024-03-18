@@ -51,12 +51,14 @@ public class UserService {
     String tel = sc.next();
     System.out.print("메일주소 : ");
     String email = sc.next();
+    System.out.print("주소 : ");
+    String addr = sc.next();
     System.out.print("경력 : ");
     String career = sc.nextLine();
     System.out.print("자격증 : ");
     String license = sc.next();
 
-    ndao.update(new Nuser(0,0, name, edu, id, tel, email, career ,license));
+    ndao.update(new Nuser(0,0, name, edu, id, tel, email, addr, career ,license));
   }
 
   // 회원정보 삭제

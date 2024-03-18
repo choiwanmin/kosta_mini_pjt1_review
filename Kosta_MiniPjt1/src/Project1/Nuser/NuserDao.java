@@ -47,9 +47,9 @@ public class NuserDao {
   }
 
   // 개인정보 수정
-  public void update(Nuser n){
+  public void update(Nuser n, int userid){
     Connection conn =db.conn();
-    String sql = "update nuser set name = ?, edu = ?, tell = ?, email = ?, career = ?, license = ?";
+    String sql = "update nuser set name = ?, edu = ?, tell = ?, email = ?, career = ?, license = ? where userid = ?";
     int cnt = 0;
     try {
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -59,6 +59,7 @@ public class NuserDao {
       pstmt.setString(4, n.getEmail()); // email
       pstmt.setString(5, n.getCareer()); // career
       pstmt.setString(6, n.getLicense()); // license
+      pstmt.setInt(7, userid);
       cnt = pstmt.executeUpdate();
       System.out.println(cnt + " 줄 수정됨.");
     } catch (SQLException e) {
@@ -96,7 +97,7 @@ public class NuserDao {
   // 개인정보 검색 (번호로 검색)
   public Nuser select(int num){
     Connection conn = db.conn();
-    String sql = "select * from board where unum = ?";
+    String sql = "select * from nuser where unum = ?";
     Nuser n = null;
     try {
       PreparedStatement prtmt = conn.prepareStatement(sql);
@@ -118,4 +119,30 @@ public class NuserDao {
     }
     return n;
   }
+  
+  //개인정보 검색 (번호로 검색)
+ public Nuser selectByUserid(int num){
+   Connection conn = db.conn();
+   String sql = "select * from nuser where userid = ?";
+   Nuser n = null;
+   try {
+     PreparedStatement prtmt = conn.prepareStatement(sql);
+     prtmt.setInt(1, num);
+     ResultSet rs = prtmt.executeQuery();
+     if(rs.next()) {
+       return new Nuser(rs.getInt(1), rs.getInt(2), rs.getString(3),
+           rs.getString(4),rs.getString(5), rs.getString(6),
+           rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+     }
+   } catch (SQLException e) {
+     e.printStackTrace();
+   } finally {
+     try {
+       conn.close();
+     } catch (SQLException e) {
+       e.printStackTrace();
+     }
+   }
+   return n;
+ }
 }

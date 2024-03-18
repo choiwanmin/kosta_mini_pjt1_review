@@ -44,18 +44,18 @@ public class IntroDao {
 	}
 	
 	// 이력서 수정 - 제목, 내용, 제출 회사
-	public void update(Intro i) {
+	public int update(Intro i) {
 		Connection conn = db.conn();
 
 		String sql = "update intro set title=?, content=?, submit=?";
-
+		int cnt = 0;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, i.getTitle());
 			pstmt.setString(2, i.getContent());
 			pstmt.setString(3, i.getSubmit());
 
-			int cnt = pstmt.executeUpdate();
+			cnt = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,6 +67,7 @@ public class IntroDao {
 				e.printStackTrace();
 			}
 		}
+		return cnt;
 	}
 	
 	// 이력서 삭제

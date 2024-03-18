@@ -36,7 +36,7 @@ public class NuserService {
 	    System.out.print("자격증 : ");
 	    String license = sc.next();
 
-	    ndao.insert(new Nuser(0,0, name, edu, id, tel, email, addr, career ,license), 2);
+	    ndao.insert(new Nuser(0,0, name, edu, id, tel, email, addr, career ,license), AdminService.UserID);
 	  }
 
 	  // 회원정보 수정
@@ -59,7 +59,7 @@ public class NuserService {
 	    System.out.print("자격증 : ");
 	    String license = sc.next();
 
-	    ndao.update(new Nuser(0,0, name, edu, id, tel, email, addr,career ,license));
+	    ndao.update(new Nuser(0,0, name, edu, id, tel, email, addr,career ,license),AdminService.UserID);
 	  }
 
 	  // 회원정보 삭제
@@ -76,8 +76,7 @@ public class NuserService {
 	  // 회원정보 조회
 	  public void selectUser() {
 	    System.out.println("내 정보 확인");
-//	    System.out.println(ndao.select(AdminService.UserID));
-	    System.out.println(ndao.select(2));
+	    System.out.println(ndao.selectByUserid(AdminService.UserID));
 	  }
 
 
@@ -87,23 +86,28 @@ public class NuserService {
 	}
 	
 	// 이력서 등록
+	//주석
 	public void addIntro(Scanner sc) {
 		System.out.println("=== 이력서 등록 ===");
 		System.out.print("title:");
 		String title = sc.next();
-		sc.nextLine();
 		System.out.print("content:");
 		String content = sc.next();
-		System.out.println("submit:");
+		sc.nextLine();
+		System.out.print("submit:");
 		String submit = sc.next();
 
 		// 첫번째 파람으로 unum을 받아 오는 NuserDao 필요할지??
-		idao.insert(new Intro(0, title, content, 0, submit), 2);
+//		Nuser nuser = ndao.select(AdminService.UserID);
+		Nuser nuser = ndao.select(2);
+		idao.insert(new Intro(0, title, content, 0, submit), nuser.getUnum());
 	}
 
 	// 이력서 수정
 	public void editIntro(Scanner sc) {
 		System.out.println("=== 이력서 수정 ===");
+		System.out.print("이력서 id:");
+		int id = sc.nextInt();
 		System.out.print("new title:");
 		String title = sc.next();
 		sc.nextLine();
@@ -112,19 +116,25 @@ public class NuserService {
 		// 제출한 회사까지 수정 가능해야 하는가?
 		System.out.println("new submit:");
 		String submit = sc.next();
-
-		idao.update(new Intro(0, title, content, 0, submit));
-
+//		Nuser nuser = ndao.select(AdminService.UserID);
+		Nuser nuser = ndao.select(2);
+		// int cnt = idao.update(new Intro(nuser.getUnum(), title, content, id, submit));
+		int cnt = idao.update(new Intro(2, title, content, id, submit));
+		if (cnt > 0) {
+			System.out.println(id+"번 이력서 수정 완료");
+		} else {
+			System.out.println("이력서  수정이 완료되지 않았음");
+		}
 	}
+
 
 	// 이력서 삭제
 	public void delIntro(Scanner sc) {
 		System.out.println("=== 이력서 삭제 ===");
 		// 이력서 조회하여 확인후 번호 삭제?
-		System.out.println("=== 이력서 조회(전체 목록) ===");
-		getAll();
 		System.out.print("id:");
 		int id = sc.nextInt();
+		System.out.println(id+"번 이력서 삭제 완료");
 		idao.delete(id);
 	}
 
@@ -138,8 +148,10 @@ public class NuserService {
 			System.out.println("없음");
 		} else {
 			System.out.println(i);
+			Nuser nuser = ndao.select(i.getUnum());
 			// 로그인 아이디 unum과 이력서 작성자 unum이 같으면 수정삭제 가능?
-			if (i.equals(i.getUnum())) {
+//			if (AdminService.UserID == nuser.getUserid()) {
+			if (2 == nuser.getUserid()) {
 				System.out.println("1.수정 2.삭제 3.이력서 페이지 종료");
 				int x = sc.nextInt();
 				switch (x) {
@@ -147,7 +159,7 @@ public class NuserService {
 					editIntro(sc);
 					break;
 				case 2:
-					delIntro(sc);;
+					delIntro(sc);
 					break;
 				}
 			}
