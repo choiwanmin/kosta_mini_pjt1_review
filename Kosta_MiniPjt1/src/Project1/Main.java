@@ -17,27 +17,6 @@ public class Main {
 		NoticeService n = new NoticeService();
 		SubNoticeService s = new SubNoticeService();
 
-//		n.addNotice(sc);
-		
-//		n.editNotice(sc, 4);
-//		n.getAll();
-//		n.getByJob(sc);
-		
-//		n.getByNum(sc);
-		
-//		s.addSub(2, 5);
-		
-		
-//		s.viewAll();
-		
-		
-		
-		
-//		n.delNotice(4);
-		
-		
-		
-		
 		
 	}
 

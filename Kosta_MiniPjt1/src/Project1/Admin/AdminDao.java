@@ -79,7 +79,7 @@ public class AdminDao {
 
 	public Admin selectId(String id) {
 		Connection conn = db.conn();
-		String sql = "select * from admin where id = ?";
+		String sql = "select * from admin where logid = ?";
 		Admin a = null;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -111,15 +111,16 @@ public class AdminDao {
 	}
 
 	// 수정
-	public void update(Admin a) {
+	public void update(Admin a, int userid) {
 		Connection conn = db.conn();
-		String sql = "update admin set logid = ?, logpw = ?, grade = ?";
+		String sql = "update admin set logid = ?, logpw = ?, grade = ? where userid =?";
 		int cnt = 0;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, a.getLogid());
 			pstmt.setString(2, a.getLogpw());
 			pstmt.setInt(3, a.getGrade());
+			pstmt.setInt(4, userid);
 			cnt = pstmt.executeUpdate();
 			System.out.println(cnt + " 줄 수정됨.");
 		} catch (SQLException e) {

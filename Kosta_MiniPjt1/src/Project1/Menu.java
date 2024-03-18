@@ -32,7 +32,7 @@ public class Menu {
 			case 3:
 				System.out.println("종료");
 				flag = false;
-				break;
+				return;
 			}
 		}
 	}
@@ -41,7 +41,6 @@ public class Menu {
 	public void runLogin(Scanner sc) {
 		boolean flag = true;
 		while (flag) {
-			System.out.println("=== 로그인 ===");
 			if(aservice.login(sc)) {
 				if(aservice.selectGrade() == 1) {
 					runUser(sc);
@@ -58,9 +57,9 @@ public class Menu {
 	public void runUser(Scanner sc) {
 		boolean flag = true;
 		while(flag) {
-			System.out.println("1.내정보등록  2.내정보수정  3.내정보확인  4.회원탈퇴\n"
-					+ "5.이력서 등록  6.이력서 수정  7.이력서 삭제  8.이력서 조회 \n"
-					+ "9.기업정보조회 10.기업전체조회  11.종료");
+			System.out.println("1.내정보등록    2.내정보수정    3.내정보확인   4.회원탈퇴\n"
+					         + "5.이력서 등록   6.이력서 수정   7.이력서 삭제  8.이력서 조회 \n"
+					         + "9.기업정보조회  10.기업전체조회  11.종료");
 			int m = sc.nextInt();
 			switch(m) {
 			case 1:
@@ -98,6 +97,7 @@ public class Menu {
 					nuservice.getByTitle(sc);
 					break;
 				}
+				break;
 			case 9:
 				cservice.printCompanyByFiled(sc);
 				break;				
@@ -105,12 +105,16 @@ public class Menu {
 				cservice.printAllCompany();
 				break;
 			case 11:
-				System.out.println("종료..");
+				System.out.println("로그아웃..");
 				flag = false;
+				aservice.UserID = 0;
+				run(sc);
 				break;
 			}
 		}
 	}
+	
+	
 	
 	// 기업회원 기능
 	public void runCompany(Scanner sc) {
@@ -154,25 +158,28 @@ public class Menu {
 				noservice.delNotice(sc);
 				break;
 			case 8:
-				System.out.println("종료..");
+				System.out.println("로그아웃..");
 				flag = false;
+				aservice.UserID = 0;
+				run(sc);
 				break;
 			}
 		}
 	}
 	
+
 	// 관리자 기능
 	public void runAdmin(Scanner sc) {
 		boolean flag = true;
 		while(flag) {
-			System.out.println("1.회원정보 수정  2.회원전체출력  3.회원 조회  4.회원 삭제  5.종료");
+			System.out.println("1.회원전체출력  2.회원정보 수정  3.회원 조회  4.회원 삭제  5.종료");
 			int m = sc.nextInt();
 			switch(m) {
 			case 1:
-				aservice.editUser(sc);
+				aservice.selectAllUser();
 				break;
 			case 2:
-				aservice.selectAllUser();
+				aservice.editUser(sc);
 				break;
 			case 3:
 				aservice.selectUser(sc);
@@ -181,8 +188,10 @@ public class Menu {
 				aservice.deleteUser(sc);
 				break;
 			case 5:
-				System.out.println("관리자기능 종료.");
+				System.out.println("로그아웃..");
 				flag = false;
+				aservice.UserID = 0;
+				run(sc);
 				break;
 			}
 		}
