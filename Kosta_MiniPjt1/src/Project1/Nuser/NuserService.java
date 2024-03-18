@@ -86,6 +86,7 @@ public class NuserService {
 
 	// 이력서 등록
 	// 주석
+	private int id = 0;
 	public void addIntro(Scanner sc) {
 		System.out.println("=== 내 이력서 등록 ===");
 		System.out.print("내 이력서 제출 공고 번호:");
@@ -95,11 +96,11 @@ public class NuserService {
 		sc.nextLine();
 		System.out.print("내 이력서 내용:");
 		String content = sc.next();
-
 		// 첫번째 파람으로 unum을 받아 오는 NuserDao 필요할지??
 //		Nuser nuser = ndao.select(AdminService.UserID);
 		Nuser nuser = ndao.select(2);
-		idao.insert(new Intro(0, title, content, 0, cnum), nuser.getUnum());
+		id++;
+		idao.insert(new Intro(0, title, content, id, cnum), nuser.getUnum());
 	}
 
 	// 이력서 수정

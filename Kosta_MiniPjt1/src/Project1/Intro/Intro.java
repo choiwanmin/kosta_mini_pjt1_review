@@ -18,6 +18,7 @@ public class Intro {
 		this.id = id;
 		this.cnum = cnum;
 	}
+	
 
 	@Override
 	public String toString() {
