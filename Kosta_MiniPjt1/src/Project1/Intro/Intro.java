@@ -21,8 +21,7 @@ public class Intro {
 
 	@Override
 	public String toString() {
-		return "Intro [unum=" + unum + ", title=" + title + ", content=" + content + ", id=" + id + ", cnum=" + cnum
-				+ "]";
+		return "[지원공고기업번호=" + cnum + ", 내이력서제목=" + title + ", 내이력서내용=" + content + ", 내이력서번호=" + id + "]";
 	}
 
 	public int getUnum() {

@@ -38,11 +38,11 @@ public class SubNoticeDao {
 	}
 	
 	
-
+	// 지원자 전체
 	public ArrayList<SubNotice> selectAll() {
 		Connection conn = db.conn();
 		String sql = "select * from SubNotice order by subnotice_id";
-		ArrayList<SubNotice> list = new ArrayList<SubNotice>();
+		ArrayList<SubNotice> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();

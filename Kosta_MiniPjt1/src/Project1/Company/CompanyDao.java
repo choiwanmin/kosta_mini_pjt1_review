@@ -128,7 +128,7 @@ public class CompanyDao {
 	public ArrayList<Company> selectAllCompany() {
 		ArrayList<Company> list = new ArrayList<>();
 		Connection conn = db.conn();
-		String sql = "select * from company";
+		String sql = "select * from company order by cnum";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
