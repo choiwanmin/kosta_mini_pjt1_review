@@ -15,7 +15,6 @@ public class Admin {
 		this.userid = userid;
 		this.grade = grade;
 	}
-
 	@Override
 	public String toString() {
 		return "[" + "회원유형=" + grade + ", 아이디='" + logid + '\'' + ", 비밀번호='" + logpw + '\'' + ", 회원번호=" + userid + "]";
