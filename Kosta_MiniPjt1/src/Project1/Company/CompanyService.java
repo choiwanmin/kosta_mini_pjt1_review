@@ -16,17 +16,17 @@ public class CompanyService {
 	public void addCompany(Scanner sc) {
 
 		System.out.println("=== 기업정보 등록 ===");
-		System.out.print("기업 이름:");
+		System.out.print("기업 이름     : ");
 		String cname = sc.next();
-		System.out.print("기업 분야 : ");
+		System.out.print("기업 분야     : ");
 		String field = sc.next();
-		System.out.print("사업자 번호 : ");
+		System.out.print("사업자 번호   : ");
 		String id = sc.next();
 		System.out.print("기업 전화번호 : ");
 		String tell = sc.next();
-		System.out.print("기업 이메일 : ");
+		System.out.print("기업 이메일   : ");
 		String email = sc.next();
-		System.out.print("기업 주소 : ");
+		System.out.print("기업 주소     : ");
 		String addr = sc.next();
 		Company p = new Company(0, 0, cname, field, id, tell, email, addr);
 		int cnt = dao.insertCompany(p, AdminService.UserID);
@@ -41,15 +41,15 @@ public class CompanyService {
 	// 기업 수정 기업이름, 기업분야, 기업전화번호, 기업 이메일, 기업주소
 	public void editCompany(Scanner sc) {
 		System.out.println("=== 기업정보 수정 ===");
-		System.out.print("수정할 기업이름:");
+		System.out.print("수정할 기업이름       : ");
 		String cname = sc.next();
-		System.out.print("수정 할 기업 분야 : ");
+		System.out.print("수정 할 기업 분야     : ");
 		String field = sc.next();
 		System.out.print("수정 할 기업 전화번호 : ");
 		String tell = sc.next();
-		System.out.print("수정 할 기업 이메일 : ");
+		System.out.print("수정 할 기업 이메일   : ");
 		String email = sc.next();
-		System.out.print("수정 할 기업주소 : ");
+		System.out.print("수정 할 기업주소      : ");
 		String addr = sc.next();
 		Company p = new Company(0, 0, cname, field, "null", tell, email, addr);
 		int cnt = dao.updateCompany(p, AdminService.UserID);

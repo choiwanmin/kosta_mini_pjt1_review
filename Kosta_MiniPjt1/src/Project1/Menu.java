@@ -1,5 +1,6 @@
 package Project1;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Project1.Admin.AdminService;
@@ -20,7 +21,12 @@ public class Menu {
 		boolean flag = true;
 		while (flag) {
 			System.out.println("1.회원가입  2.로그인  3.종료");
-			int m = sc.nextInt();
+			int m = 0;
+			try {
+				m = sc.nextInt();
+			} catch (InputMismatchException e){
+				System.out.println("잘못된 입력입니다.");
+			}
 			switch (m) {
 			case 1:
 				aservice.addUser(sc);
@@ -33,9 +39,6 @@ public class Menu {
 				System.out.println("종료");
 				flag = false;
 				break;
-			default:
-                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-                break;
 			}
 		}
 	}
@@ -54,7 +57,7 @@ public class Menu {
 					runAdmin(sc);
 				}
 			}else {
-	            System.out.println("로그인에 실패했습니다. 다시 시도하세요.");		
+	            System.out.println("로그인에 실패했습니다. 다시 시도하세요.");
 	            flag = false;
 			}
 		}
@@ -67,7 +70,12 @@ public class Menu {
 		while(flag) {
 			System.out.println("1.내정보등록    2.내정보수정    3.내정보확인    4.회원탈퇴\n"
 					             + "5.이력서 관리   6.기업정보조회  7.기업전체조회  8.종료");
-			int m = sc.nextInt();
+			int m = 0;
+			try {
+				m = sc.nextInt();
+			} catch (InputMismatchException e){
+				System.out.println("잘못된 입력입니다.");
+			}
 			switch (m) {
 			case 1:
 				nuservice.addUser(sc);
@@ -149,7 +157,12 @@ public class Menu {
 		while(flag) {
 			System.out.println("1.정보등록  2.정보수정  3.내정보확인 \n"+
 					  				     "4.회원탈퇴  5.공고관리  6.종료");
-			int m = sc.nextInt();
+			int m = 0;
+			try {
+				m = sc.nextInt();
+			} catch (InputMismatchException e){
+				System.out.println("잘못된 입력입니다.");
+			}
 			switch (m) {
 			case 1:
 				cservice.addCompany(sc);
@@ -172,6 +185,9 @@ public class Menu {
 				aservice.UserID = 0;
 				run(sc);
 				break;
+				default:
+					System.out.println("잘못된 입력입니다.");
+					break;
 			}
 		}
 	}
@@ -183,7 +199,12 @@ public class Menu {
 			System.out.println("=== 공고 관리 ===");
 			System.out.println("1.공고확인    2.공고등록    3.수정   4.삭제   5.조회 \n" +
 											   "6.지원자확인  7.끌어올리기  8.종료");
-			int m = sc.nextInt();
+			int m = 0;
+			try {
+				m = sc.nextInt();
+			} catch (InputMismatchException e){
+				System.out.println("잘못된 입력입니다.");
+			}
 			switch (m){
 				case 1:
 					noservice.getAll();
@@ -216,6 +237,7 @@ public class Menu {
 					snservice.viewUser();
 					break;
 				case 7:
+					noservice.editDate(sc);
 					break;
 				case 8:
 					System.out.println("나가기");
@@ -230,7 +252,12 @@ public class Menu {
 		boolean flag = true;
 		while(flag) {
 			System.out.println("1.회원전체출력  2.회원정보수정  3.회원 조회  4.회원 삭제  5.종료");
-			int m = sc.nextInt();
+			int m = 0;
+			try {
+				m = sc.nextInt();
+			} catch (InputMismatchException e){
+				System.out.println("잘못된 입력입니다.");
+			}
 			switch (m) {
 			case 1:
 				aservice.selectAllUser();
@@ -253,5 +280,4 @@ public class Menu {
 			}
 		}
 	}
-
 }
