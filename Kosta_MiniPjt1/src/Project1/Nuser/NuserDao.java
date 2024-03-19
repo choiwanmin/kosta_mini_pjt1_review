@@ -49,7 +49,7 @@ public class NuserDao {
   // 개인정보 수정
   public void update(Nuser n, int userid){
     Connection conn =db.conn();
-    String sql = "update nuser set name = ?, edu = ?, tell = ?, email = ?, career = ?, license = ? where userid = ?";
+    String sql = "update nuser set name = ?, edu = ?, tell = ?, email = ?, addr = ?, career = ?, license = ? where userid = ?";
     int cnt = 0;
     try {
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -57,9 +57,10 @@ public class NuserDao {
       pstmt.setString(2, n.getEdu()); // edu
       pstmt.setString(3, n.getTell()); // tell
       pstmt.setString(4, n.getEmail()); // email
-      pstmt.setString(5, n.getCareer()); // career
-      pstmt.setString(6, n.getLicense()); // license
-      pstmt.setInt(7, userid);
+      pstmt.setString(5, n.getAddr()); // addr
+      pstmt.setString(6, n.getCareer()); // career
+      pstmt.setString(7, n.getLicense()); // license
+      pstmt.setInt(8, userid);
       cnt = pstmt.executeUpdate();
       System.out.println(cnt + " 줄 수정됨.");
     } catch (SQLException e) {
