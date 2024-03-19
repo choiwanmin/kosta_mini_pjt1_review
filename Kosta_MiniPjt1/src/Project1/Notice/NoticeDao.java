@@ -68,30 +68,6 @@ public class NoticeDao {
 		}
 	}
 	
-	
-	public void updateDate(Date sqldate,int com_id) {
-	    Connection conn = db.conn();
-	    String sql = "update notice set DeadLine=? where com_id=?";
-	    try {
-	        PreparedStatement pstmt = conn.prepareStatement(sql);
-	        // 오늘 날짜를 가져와서 SQL Date로 변환
-	        Date today = Date.valueOf(LocalDate.now());
-	        pstmt.setDate(1, today);
-	        pstmt.setInt(2, com_id);
-	        int cnt = pstmt.executeUpdate();
-	        System.out.println(cnt + " 줄 수정됨");
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        try {
-	            conn.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	}
-	
-	
 	public Notice select(int com_id) {
 		Connection conn = db.conn();
 		String sql = "select * from notice where com_id=? order by com_id";
@@ -116,7 +92,6 @@ public class NoticeDao {
 		}
 		return null;
 	}
-	
 	
 	//직무 이름으로 검색.
 	public ArrayList<Notice> selectByJob(String job) {
@@ -143,8 +118,6 @@ public class NoticeDao {
 		}
 		return list;
 	}
-	
-	
 	
 	public ArrayList<Notice> selectAll(){
 		Connection conn = db.conn();
@@ -192,28 +165,26 @@ public class NoticeDao {
 			}
 		}
 	}
-
-	// 끌어올리기
+	
 	public void updateDate(Date sqldate,int com_id) {
-		Connection conn = db.conn();
-		String sql = "update notice set period=? where com_id=?";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-// 오늘 날짜를 가져와서 SQL Date로 변환
-			Date today = Date.valueOf(LocalDate.now());
-			pstmt.setDate(1, today);
-			pstmt.setInt(2, com_id);
-			int cnt = pstmt.executeUpdate();
-			System.out.println(cnt + " 줄 수정됨");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+	    Connection conn = db.conn();
+	    String sql = "update notice set DeadLine=? where com_id=?";
+	    try {
+	        PreparedStatement pstmt = conn.prepareStatement(sql);
+	        // 오늘 날짜를 가져와서 SQL Date로 변환
+	        Date today = Date.valueOf(LocalDate.now());
+	        pstmt.setDate(1, today);
+	        pstmt.setInt(2, com_id);
+	        int cnt = pstmt.executeUpdate();
+	        System.out.println(cnt + " 줄 수정됨");
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
-
 }
