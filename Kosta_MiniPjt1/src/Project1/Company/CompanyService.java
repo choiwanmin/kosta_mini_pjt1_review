@@ -35,7 +35,6 @@ public class CompanyService {
 		} else {
 			System.out.println("기업 등록 실패");
 		}
-
 	}
 
 	// 기업 수정 기업이름, 기업분야, 기업전화번호, 기업 이메일, 기업주소

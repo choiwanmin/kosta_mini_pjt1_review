@@ -239,7 +239,7 @@ public class Menu {
 					}
 					break;
 				case 6:
-					snservice.viewUser();
+					snservice.viewUser(sc);
 					break;
 				case 7:
 					noservice.editDate(sc);

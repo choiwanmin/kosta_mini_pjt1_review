@@ -48,9 +48,10 @@ public class SubNoticeService {
 	}
 	
 	// 기업이 등록된 지원자 현황 출력
-	public void viewUser() {
+	public void viewUser(Scanner sc) {
 		int cnt = 1;
-		int cnum = cdao.selectCompany(AdminService.UserID).getCnum();
+		System.out.print("확인할 공고의 번호를 입력하시오 : ");
+		int cnum = sc.nextInt();
 		System.out.println("=== 지원자 현황  조회(전체 목록) ===");
 		ArrayList<Intro> list = idao.selectByCom(cnum);
 		if (list.isEmpty()) {
@@ -58,11 +59,11 @@ public class SubNoticeService {
 		} else {
 			for (Intro i : list) {
 				System.out.println(cnt+ "번째 지원자 정보");
-				System.out.print("이름 : " + ndao.select(i.getUnum()).getName());
-				System.out.println("  || 지원자 id : " + ndao.select(i.getUnum()).getUserid());
-				System.out.print("주소 : " + ndao.select(i.getUnum()).getAddr());
-				System.out.print("   ||  학력 : " + ndao.select(i.getUnum()).getEdu());
-				System.out.println("  ||  전화번호 : " + ndao.select(i.getUnum()).getTell());
+				System.out.print("이름 : " + ndao.selectByUnum(i.getUnum()).getName());
+				System.out.println("  || 지원자 id : " + ndao.selectByUnum(i.getUnum()).getUserid());
+				System.out.print("주소 : " + ndao.selectByUnum(i.getUnum()).getAddr());
+				System.out.print("   ||  학력 : " + ndao.selectByUnum(i.getUnum()).getEdu());
+				System.out.println("  ||  전화번호 : " + ndao.selectByUnum(i.getUnum()).getTell());
 				cnt++;
 			}
 		}

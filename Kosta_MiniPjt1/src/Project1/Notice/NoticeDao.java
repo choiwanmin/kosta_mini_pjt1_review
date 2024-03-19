@@ -168,7 +168,7 @@ public class NoticeDao {
 	
 	public void updateDate(Date sqldate,int com_id) {
 	    Connection conn = db.conn();
-	    String sql = "update notice set DeadLine=? where com_id=?";
+	    String sql = "update notice set period = ? where com_id=?";
 	    try {
 	        PreparedStatement pstmt = conn.prepareStatement(sql);
 	        // 오늘 날짜를 가져와서 SQL Date로 변환
