@@ -114,7 +114,12 @@ public class Menu {
 		while (flag){
 			System.out.println("=== 이력서 관리 ===");
 			System.out.println("1.공고확인  2.이력서등록  3.수정  4.삭제  5.조회  6.나가기");
-			int m = sc.nextInt();
+			int m = 0;
+			try {
+				m = sc.nextInt();
+			} catch (InputMismatchException e){
+				System.out.println("잘못된 입력입니다.");
+			}
 			switch (m){
 				case 1:
 					noservice.getAll();
