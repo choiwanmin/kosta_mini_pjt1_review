@@ -48,13 +48,14 @@ public class IntroDao {
 	public int update(Intro i, int id) {
 		Connection conn = db.conn();
 
-		String sql = "update intro set title=?, content=? where id=?";
+		String sql = "update intro set title=?, content=? where unum=? and id=?";
 		int cnt = 0;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, i.getTitle());
-			pstmt.setString(2, i.getContent());
-			pstmt.setInt(3, id);
+			pstmt.setString(2, i.getContent());			
+			pstmt.setInt(3, i.getUnum());
+			pstmt.setInt(4, id);
 
 			cnt = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -72,13 +73,14 @@ public class IntroDao {
 	}
 	
 	// 이력서 삭제
-	public void delete(int id) {
+	public void delete(int id, int unum) {
 		Connection conn = db.conn();
-		String sql = "delete from intro where id=?";
+		String sql = "delete from intro where unum=? and id=?";
 
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id);
+			pstmt.setInt(1, unum);
+			pstmt.setInt(2, id);
 
 			int cnt = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -93,13 +95,14 @@ public class IntroDao {
 			}
 		}
 	}
-	// 이력서 조회(번호)
-	public Intro selectById(int id) {
+	// 내 이력서 조회(번호)
+	public Intro selectById(int id, int unum) {
 		Connection conn = db.conn();
-		String sql = "select * from intro where id=?";
+		String sql = "select * from intro where unum=? and id=?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id);
+			pstmt.setInt(1, unum);
+			pstmt.setInt(2, id);
 
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -118,14 +121,15 @@ public class IntroDao {
 		}
 		return null;
 	}
-	// 이력서 조회(제목)
-	public ArrayList<Intro> selectByTitle(String title) {
+	// 내 이력서 조회(제목)
+	public ArrayList<Intro> selectByTitle(String title, int unum) {
 		Connection conn = db.conn();
-		String sql = "select * from intro where title like ? order by id";
+		String sql = "select * from intro where unum=? and title like ? order by id";
 		ArrayList<Intro> list = new ArrayList<>();
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + title + "%");
+			PreparedStatement pstmt = conn.prepareStatement(sql);			
+			pstmt.setInt(1, unum);
+			pstmt.setString(2, "%" + title + "%");
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -145,7 +149,7 @@ public class IntroDao {
 		return list;
 	}
 
-	// 이력서 조회(기업번호)
+	// 내 이력서 조회(기업번호)
 	public ArrayList<Intro> selectByCom(int cnum){
 		Connection conn = db.conn();
 		String sql = "select * from intro where cnum = ?";
@@ -188,5 +192,31 @@ public class IntroDao {
 		}
 		return list;
 	}
+	
+	// 내 이력서 조회(전체)
+		public ArrayList<Intro> selectMyIntro(int unum) {
+			Connection conn = db.conn();
+			String sql = "select * from intro where unum =? ";
+			ArrayList<Intro> list = new ArrayList<>();
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, unum);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					list.add(new Intro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return list;
+		}
 }
 

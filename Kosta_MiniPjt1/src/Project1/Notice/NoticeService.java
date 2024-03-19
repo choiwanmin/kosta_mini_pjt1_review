@@ -30,13 +30,13 @@ public class NoticeService {
 		String deadline = sc.next();
 		java.util.Date date;
 		try {
-				date = formatter.parse(deadline);
-			    java.sql.Date sqldate = new java.sql.Date(date.getTime());
-			    dao.insert(new Notice(0, 0, null, salary, job, sqldate), 22);
-			} catch (ParseException e) {
-				 System.out.println("잘못된 날짜 형식입니다. 년-월-일 형식으로 입력해주세요.");
-				e.printStackTrace();
-			}
+			date = formatter.parse(deadline);
+			java.sql.Date sqldate = new java.sql.Date(date.getTime());
+			dao.insert(new Notice(0, 0, null, salary, job, sqldate), 22);
+		} catch (ParseException e) {
+			System.out.println("잘못된 날짜 형식입니다. 년-월-일 형식으로 입력해주세요.");
+			e.printStackTrace();
+		}
 	}
 
 	// 공고 삭제
@@ -64,13 +64,13 @@ public class NoticeService {
 		String deadline = sc.next();
 		java.util.Date date;
 		try {
-				date = formatter.parse(deadline);
-			    java.sql.Date sqldate = new java.sql.Date(date.getTime());
-			    dao.update(new Notice(0, 0, null, salary, job,sqldate), com_id);
-			} catch (ParseException e) {
-				 System.out.println("잘못된 날짜 형식입니다. 년-월-일 형식으로 입력해주세요.");
-				e.printStackTrace();
-			}
+			date = formatter.parse(deadline);
+			java.sql.Date sqldate = new java.sql.Date(date.getTime());
+			dao.update(new Notice(0, 0, null, salary, job, sqldate), com_id);
+		} catch (ParseException e) {
+			System.out.println("잘못된 날짜 형식입니다. 년-월-일 형식으로 입력해주세요.");
+			e.printStackTrace();
+		}
 	}
 
 	// 공고 번호로 검색
@@ -82,7 +82,13 @@ public class NoticeService {
 		if (n == null) {
 			System.out.println("없는 글번호");
 		} else {
-			System.out.println(n);
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.printf("%6s %9s %10s %10s %10s %10s", "공고번호", "기업번호", "직무", "급여", "지원일", "마감일");
+			System.out.println();
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.format("%5d %11d %16s %8d %14s %11s", n.getCom_id(), n.getcNum(), n.getJob(), n.getSalary(), n.getPeriod(), n.getDeadLine());
+			System.out.println();
+			System.out.println("--------------------------------------------------------------------------------------------------");
 			if (no.getcNum() == n.getcNum()) {
 				System.out.println("1.수정  02.삭제  3.상세페이지종료");
 				int x = sc.nextInt();
@@ -107,9 +113,15 @@ public class NoticeService {
 		if (list.isEmpty()) {
 			System.out.println("검색된 결과가 없다");
 		} else {
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.printf("%6s %9s %10s %10s %10s %10s", "공고번호", "기업번호", "직무", "급여", "지원일", "마감일");
+			System.out.println();
+			System.out.println("--------------------------------------------------------------------------------------------------");
 			for (Notice n : list) {
-				System.out.println(n);
+				System.out.format("%5d %11d %16s %8d %14s %11s", n.getCom_id(), n.getcNum(), n.getJob(), n.getSalary(), n.getPeriod(), n.getDeadLine());
+				System.out.println();
 			}
+			System.out.println("--------------------------------------------------------------------------------------------------");
 		}
 	}
 
@@ -120,9 +132,15 @@ public class NoticeService {
 		if (list.isEmpty()) {
 			System.out.println("검색된 결과가 없다");
 		} else {
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.printf("%6s %9s %10s %10s %10s %10s", "공고번호", "기업번호", "직무", "급여", "지원일", "마감일");
+			System.out.println();
+			System.out.println("--------------------------------------------------------------------------------------------------");
 			for (Notice n : list) {
-				System.out.println(n);
+				System.out.format("%5d %11d %16s %8d %14s %11s", n.getCom_id(), n.getcNum(), n.getJob(), n.getSalary(), n.getPeriod(), n.getDeadLine());
+				System.out.println();
 			}
+			System.out.println("--------------------------------------------------------------------------------------------------");
 		}
 	}
 
