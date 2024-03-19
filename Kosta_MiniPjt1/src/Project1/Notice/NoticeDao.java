@@ -1,6 +1,10 @@
 package Project1.Notice;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -62,6 +66,29 @@ public class NoticeDao {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	
+	public void updateDate(Date sqldate,int com_id) {
+	    Connection conn = db.conn();
+	    String sql = "update notice set DeadLine=? where com_id=?";
+	    try {
+	        PreparedStatement pstmt = conn.prepareStatement(sql);
+	        // 오늘 날짜를 가져와서 SQL Date로 변환
+	        Date today = Date.valueOf(LocalDate.now());
+	        pstmt.setDate(1, today);
+	        pstmt.setInt(2, com_id);
+	        int cnt = pstmt.executeUpdate();
+	        System.out.println(cnt + " 줄 수정됨");
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
 	
 	

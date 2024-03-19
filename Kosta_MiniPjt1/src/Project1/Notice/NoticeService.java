@@ -72,6 +72,23 @@ public class NoticeService {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void editDate(Scanner sc) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("=== 공고 끌어올리기 ===");
+		getAll();
+		System.out.println("===============");
+		System.out.print("변경할 공고번호 선택 : ");
+		int com_id = sc.nextInt();
+		
+		//date 클래스에서 현재 날짜를 가져와 SQL 데이터로 형식 변환
+		java.util.Date today = new java.util.Date();
+		java.sql.Date sqldate = new java.sql.Date(today.getTime());
+		
+		//DAO 호출하여 공고날짜 업데이트
+		dao.updateDate(sqldate,com_id);
+	}
 
 	// 공고 번호로 검색
 	public void getByNum(Scanner sc) {
