@@ -120,7 +120,33 @@ public class NuserDao {
     }
     return n;
   }
-  
+
+  // 개인정보 검색 unum
+  public Nuser selectByUnum(int num){
+    Connection conn = db.conn();
+    String sql = "select * from nuser where unum = ?";
+    Nuser n = null;
+    try {
+      PreparedStatement prtmt = conn.prepareStatement(sql);
+      prtmt.setInt(1, num);
+      ResultSet rs = prtmt.executeQuery();
+      if(rs.next()) {
+        return new Nuser(rs.getInt(1), rs.getInt(2), rs.getString(3),
+            rs.getString(4),rs.getString(5), rs.getString(6),
+            rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        conn.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    return n;
+  }
+
   //개인정보 검색 (번호로 검색)
  public Nuser selectByUserid(int num){
    Connection conn = db.conn();

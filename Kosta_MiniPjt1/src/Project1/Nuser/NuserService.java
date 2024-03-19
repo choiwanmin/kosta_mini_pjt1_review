@@ -96,10 +96,11 @@ public class NuserService {
 		System.out.print("공고 번호   : ");
 		int cnum = sc.nextInt();
 		System.out.print("이력서 제목 : ");
-		String title = sc.next();
 		sc.nextLine();
+		String title = sc.nextLine();
 		System.out.print("이력서 내용 : ");
-		String content = sc.next();
+		sc.nextLine();
+		String content = sc.nextLine();
 		Nuser nuser = ndao.select(AdminService.UserID);
 		idao.insert(new Intro(0, title, content, 0, cnum), nuser.getUnum());
 	}
@@ -110,10 +111,11 @@ public class NuserService {
 		System.out.print("내 이력서 번호 : ");
 		int id = sc.nextInt();
 		System.out.print("새로운 내 이력서 제목 : ");
-		String title = sc.next();
 		sc.nextLine();
+		String title = sc.nextLine();
 		System.out.print("새로운 내 이력서 내용 : ");
-		String content = sc.next();
+		sc.nextLine();
+		String content = sc.nextLine();
 		Nuser nuser = ndao.select(AdminService.UserID);
 		int cnt = idao.update(new Intro(nuser.getUnum(), title, content, id, 0), id);
 		if (cnt > 0) {
