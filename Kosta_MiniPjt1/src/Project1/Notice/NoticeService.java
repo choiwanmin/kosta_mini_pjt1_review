@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Project1.Admin.AdminService;
 import Project1.Company.CompanyDao;
 
 public class NoticeService {
@@ -30,20 +31,19 @@ public class NoticeService {
 		String deadline = sc.next();
 		java.util.Date date;
 		try {
-			date = formatter.parse(deadline);
-			java.sql.Date sqldate = new java.sql.Date(date.getTime());
-			dao.insert(new Notice(0, 0, null, salary, job, sqldate), 22);
-		} catch (ParseException e) {
-			System.out.println("잘못된 날짜 형식입니다. 년-월-일 형식으로 입력해주세요.");
-			e.printStackTrace();
-		}
+				date = formatter.parse(deadline);
+			    java.sql.Date sqldate = new java.sql.Date(date.getTime());
+			    dao.insert(new Notice(0, 0, null, salary, job, sqldate), cdao.selectCompany(AdminService.UserID).getCnum());
+			} catch (ParseException e) {
+				 System.out.println("잘못된 날짜 형식입니다. 년-월-일 형식으로 입력해주세요.");
+				e.printStackTrace();
+			}
 	}
 
 	// 공고 삭제
-
 	public void delNotice(Scanner sc) {
 		System.out.println("=== 공고 삭제 ===");
-		System.out.print("삭제할 공고번호:");
+		System.out.print("삭제할 공고번호 : ");
 		int com_id = sc.nextInt();
 		dao.delete(com_id);
 	}
@@ -144,4 +144,20 @@ public class NoticeService {
 		}
 	}
 
+	// 공고 끌어올리기
+	public void editDate(Scanner sc) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("=== 공고 끌어올리기 ===");
+		getAll();
+		System.out.println("===============");
+		System.out.print("변경할 공고번호 선택 : ");
+		int com_id = sc.nextInt();
+
+		//date 클래스에서 현재 날짜를 가져와 SQL 데이터로 형식 변환
+		java.util.Date today = new java.util.Date();
+		java.sql.Date sqldate = new java.sql.Date(today.getTime());
+
+		//DAO 호출하여 공고날짜 업데이트
+		dao.updateDate(sqldate,com_id);
+	}
 }
