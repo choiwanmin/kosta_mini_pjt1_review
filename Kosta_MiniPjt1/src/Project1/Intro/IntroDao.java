@@ -19,15 +19,15 @@ public class IntroDao {
 	public void insert(Intro i, int num) {
 		Connection conn = db.conn();
 
-		String sql = "insert into intro values(?,?,?,?,?)";
+		String sql = "insert into intro values(?,?,?,seq_intro.nextval,?)";
 
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, i.getTitle());
 			pstmt.setString(3, i.getContent());
-			pstmt.setInt(4, i.getId());
-			pstmt.setInt(5, i.getCnum());
+//			pstmt.setInt(4, i.getId());
+			pstmt.setInt(4, i.getCnum());
 
 			int cnt = pstmt.executeUpdate();
 		} catch (SQLException e) {

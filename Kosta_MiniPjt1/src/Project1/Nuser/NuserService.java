@@ -85,7 +85,6 @@ public class NuserService {
 
 	// 내 이력서 등록
 	// 주석
-	private int id = 0;
 	public void addIntro(Scanner sc) {
 		System.out.println("=== 내 이력서 등록 ===");
 		System.out.print("내 이력서 제출 공고 번호 : ");
@@ -96,8 +95,7 @@ public class NuserService {
 		System.out.print("내 이력서 내용 : ");
 		String content = sc.next();
 		Nuser nuser = ndao.select(AdminService.UserID);
-		id++;
-		idao.insert(new Intro(0, title, content, id, cnum), nuser.getUnum());
+		idao.insert(new Intro(0, title, content, 0, cnum), nuser.getUnum());
 	}
 
 	// 내 이력서 수정
@@ -141,12 +139,13 @@ public class NuserService {
 			System.out.println("없음");
 		} else {
 			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.printf("%10s %10s %10s %10s", "이력서번호", "기업번호", "제목", "내용");
+			System.out.printf("%10s %10s %13s %53s", "이력서번호", "기업번호", "제목", "내용");
 			System.out.println();
 			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.format("%5d %5d %-30s %-50s", i.getId(), i.getCnum(), i.getTitle(), i.getContent());
+			System.out.format("%8d %13d %20s %50s", i.getId(), i.getCnum(), i.getTitle(), i.getContent());
 			System.out.println();
 			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.println();
 		}
 			if (AdminService.UserID == nuser.getUserid()) {
 				System.out.println("1.내이력서수정  2.내이력서삭제  3.나가기");
@@ -172,9 +171,16 @@ public class NuserService {
 		if (list.isEmpty()) {
 			System.out.println("없음");
 		} else {
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.printf("%10s %10s %13s %53s", "이력서번호", "기업번호", "제목", "내용");
+			System.out.println();
+			System.out.println("--------------------------------------------------------------------------------------------------");
 			for (Intro i : list) {
-				System.out.println(i);
+				System.out.format("%8d %13d %20s %50s", i.getId(), i.getCnum(), i.getTitle(), i.getContent());
+				System.out.println();
 			}
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.println();
 		}
 	}
 
@@ -188,10 +194,16 @@ public class NuserService {
 		if (list.isEmpty()) {
 			System.out.println("없음");
 		} else {
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.printf("%10s %10s %13s %53s", "이력서번호", "기업번호", "제목", "내용");
+			System.out.println();
+			System.out.println("--------------------------------------------------------------------------------------------------");
 			for (Intro i : list) {
-				System.out.println(i);
+				System.out.format("%8d %13d %20s %50s", i.getId(), i.getCnum(), i.getTitle(), i.getContent());
+				System.out.println();
+			}
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.println();
 			}
 		}
 	}
-	
-}

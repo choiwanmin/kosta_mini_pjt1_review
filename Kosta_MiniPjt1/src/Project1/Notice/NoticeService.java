@@ -89,6 +89,7 @@ public class NoticeService {
 			System.out.format("%5d %11d %16s %8d %14s %11s", n.getCom_id(), n.getcNum(), n.getJob(), n.getSalary(), n.getPeriod(), n.getDeadLine());
 			System.out.println();
 			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.println();
 			if (no.getcNum() == n.getcNum()) {
 				System.out.println("1.수정  02.삭제  3.상세페이지종료");
 				int x = sc.nextInt();
@@ -122,6 +123,7 @@ public class NoticeService {
 				System.out.println();
 			}
 			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.println();
 		}
 	}
 
@@ -141,6 +143,7 @@ public class NoticeService {
 				System.out.println();
 			}
 			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.println();
 		}
 	}
 
