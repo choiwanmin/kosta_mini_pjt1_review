@@ -5,16 +5,22 @@ import java.util.Scanner;
 
 import Project1.Admin.AdminService;
 import Project1.Company.Company;
+import Project1.Company.CompanyDao;
 import Project1.Intro.Intro;
 import Project1.Intro.IntroDao;
+import Project1.Notice.NoticeDao;
 
 public class NuserService {
 	private IntroDao idao;
 	private NuserDao ndao;
+	private CompanyDao cdao;
+	private NoticeDao nodao;
 
 	public NuserService() {
 		idao = new IntroDao();
 		ndao = new NuserDao();
+		cdao = new CompanyDao();
+		nodao = new NoticeDao();
 	}
 
 	// 회원정보 등록
@@ -86,13 +92,13 @@ public class NuserService {
 	// 내 이력서 등록
 	// 주석
 	public void addIntro(Scanner sc) {
-		System.out.println("=== 내 이력서 등록 ===");
-		System.out.print("내 이력서 제출 공고 번호 : ");
+		System.out.println("=== 이력서 등록 ===");
+		System.out.print("공고 번호   : ");
 		int cnum = sc.nextInt();
-		System.out.print("내 이력서 제목 : ");
+		System.out.print("이력서 제목 : ");
 		String title = sc.next();
 		sc.nextLine();
-		System.out.print("내 이력서 내용 : ");
+		System.out.print("이력서 내용 : ");
 		String content = sc.next();
 		Nuser nuser = ndao.select(AdminService.UserID);
 		idao.insert(new Intro(0, title, content, 0, cnum), nuser.getUnum());
@@ -100,7 +106,7 @@ public class NuserService {
 
 	// 내 이력서 수정
 	public void editIntro(Scanner sc) {
-		System.out.println("=== 내 이력서 수정 ===");
+		System.out.println("=== 이력서 수정 ===");
 		System.out.print("내 이력서 번호 : ");
 		int id = sc.nextInt();
 		System.out.print("새로운 내 이력서 제목 : ");
@@ -119,9 +125,9 @@ public class NuserService {
 
 	// 내 이력서 삭제
 	public void delIntro(Scanner sc) {
-		System.out.println("=== 내 이력서 삭제 ===");
-		// 이력서 조회하여 확인후 번호 삭제?
-		System.out.print("내 이력서 번호 : ");
+		System.out.println("=== 이력서 삭제 ===");
+		getAll();
+		System.out.print("삭제할 이력서 번호 : ");
 		int id = sc.nextInt();
 		System.out.println(id + "번 이력서 삭제 완료");
 		Nuser nuser = ndao.select(AdminService.UserID);
@@ -130,7 +136,7 @@ public class NuserService {
 
 	// 내 이력서 조회(번호)
 	public void getById(Scanner sc) {
-		System.out.println("=== 내 이력서 조회(번호) ===");
+		System.out.println("=== 이력서 조회(번호) ===");
 		System.out.print("내 이력서 번호 : ");
 		int id = sc.nextInt();
 		Nuser nuser = ndao.select(AdminService.UserID);
@@ -139,13 +145,10 @@ public class NuserService {
 			System.out.println("없음");
 		} else {
 			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.printf("%10s %10s %13s %53s", "이력서번호", "기업번호", "제목", "내용");
-			System.out.println();
+			System.out.println("이력서 번호 : " + i.getId() + "  || 기업명 : " + cdao.selectCompanyByCnum(i.getCnum()) + "  || 기업번호 : " + i.getCnum());
+			System.out.println("제목 : " +i.getTitle());
+			System.out.println("내용 : " +i.getContent());
 			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.format("%8d %13d %20s %50s", i.getId(), i.getCnum(), i.getTitle(), i.getContent());
-			System.out.println();
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.println();
 		}
 			if (AdminService.UserID == nuser.getUserid()) {
 				System.out.println("1.내이력서수정  2.내이력서삭제  3.나가기");
@@ -170,39 +173,33 @@ public class NuserService {
 		ArrayList<Intro> list = idao.selectByTitle(title, nuser.getUnum());
 		if (list.isEmpty()) {
 			System.out.println("없음");
-		} else {
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.printf("%10s %10s %13s %53s", "이력서번호", "기업번호", "제목", "내용");
-			System.out.println();
-			System.out.println("--------------------------------------------------------------------------------------------------");
+		} else
 			for (Intro i : list) {
-				System.out.format("%8d %13d %20s %50s", i.getId(), i.getCnum(), i.getTitle(), i.getContent());
-				System.out.println();
+				System.out.println("--------------------------------------------------------------------------------------------------");
+				System.out.println("이력서 번호 : " + i.getId() + "  || 기업명 : " + cdao.selectCompanyByCnum(nodao.select(i.getCnum()).getcNum()).getCname() + "  || 공고번호 : " + i.getCnum());
+				System.out.println("제목 : " +i.getTitle());
+				System.out.println("내용 : " +i.getContent());
+				System.out.println("--------------------------------------------------------------------------------------------------");
 			}
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.println();
-		}
+		System.out.println();
 	}
 
 	// 내 이력서 조회(전체)
 	public void getAll() {
 		System.out.println("=== 내 이력서 조회(전체 목록) ===");
-
 		Nuser nuser = ndao.selectByUserid(AdminService.UserID);
 		int unum = nuser.getUnum();
 		ArrayList<Intro> list = idao.selectMyIntro(unum);
 		if (list.isEmpty()) {
 			System.out.println("없음");
 		} else {
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.printf("%10s %10s %13s %53s", "이력서번호", "기업번호", "제목", "내용");
-			System.out.println();
-			System.out.println("--------------------------------------------------------------------------------------------------");
 			for (Intro i : list) {
-				System.out.format("%8d %13d %20s %50s", i.getId(), i.getCnum(), i.getTitle(), i.getContent());
-				System.out.println();
+				System.out.println("--------------------------------------------------------------------------------------------------");
+				System.out.println("이력서 번호 : " + i.getId() + "  || 기업명 : " + cdao.selectCompanyByCnum(nodao.select(i.getCnum()).getcNum()).getCname() + "  || 공고번호 : " + i.getCnum());
+				System.out.println("제목 : " +i.getTitle());
+				System.out.println("내용 : " +i.getContent());
+				System.out.println("--------------------------------------------------------------------------------------------------");
 			}
-			System.out.println("--------------------------------------------------------------------------------------------------");
 			System.out.println();
 			}
 		}

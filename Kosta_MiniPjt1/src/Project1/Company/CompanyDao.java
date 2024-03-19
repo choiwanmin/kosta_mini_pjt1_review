@@ -178,4 +178,32 @@ public class CompanyDao {
 		}
 		return c;
 	}
+
+	// 기업정보검색 cnum
+	public Company selectCompanyByCnum(int cnum) {
+		Connection conn = db.conn();
+		Company c = null;
+		String sql = "select * from company where cnum =?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, cnum);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				c = new Company(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getString(6), rs.getString(7), rs.getString(8));
+				return c;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return c;
+	}
 }
