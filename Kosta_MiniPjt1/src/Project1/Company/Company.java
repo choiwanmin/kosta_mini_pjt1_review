@@ -94,8 +94,10 @@ public class Company {
 
 	@Override
 	public String toString() {
-		return "Company [사용자아이디=" + userId + ", 회사번호=" + cnum + ", 회사이름=" + cname + ", 회사분류=" + field + ", 사업자번호=" + id
-				+ ", 회사전화번호=" + tell + ", 회사이메일=" + email + ", 회사주소=" + addr + "]";
+
+		return "[기업회원아이디=" + userId + ", 기업회원번호=" + cnum + ", 기업명=" + cname + ", 기업분류=" + field + ", 사업자번호=" + id
+				+ ", 기업전화번호=" + tell + ", 기업이메일=" + email + ", 기업주소=" + addr + "]";
+
 	}
 	
 	
