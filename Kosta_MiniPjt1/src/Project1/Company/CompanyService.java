@@ -85,16 +85,15 @@ public class CompanyService {
 		if (list.isEmpty()) {
 			System.out.println("조회된 기업 없음");
 		} else {
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.printf("%5s %5s %15s %14s %10s %14s", "기업번호", "기업명", "기업전화번호", "기업이메일", "기업주소", "기업분야");
-			System.out.println();
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			for (Company c : list) {
-				System.out.format("%5d %10s %13s %20s %10s %16s", c.getCnum(), c.getCname(), c.getTell(), c.getEmail(), c.getAddr(), c.getField());
-				System.out.println();
-			}
+			System.out.println("=== 전체 기업 조회 ===");
 			System.out.println(
-			        "--------------------------------------------------------------------------------------------------");
+					"--------------------------------------------------------------------------------------------------");
+			for (Company c : list) {
+				System.out.println("기업번호 : " + c.getCnum() + "  || 기엄명 : " + c.getCname() + "  || 기업 분야 : " + c.getField());
+				System.out.println("전화번호 : " + c.getTell() + "  || 기업 이메일 : " + c.getEmail() + "  || 기업주소 : " + c.getAddr());
+				System.out.println(
+						"--------------------------------------------------------------------------------------------------");
+			}
 			System.out.println();
 		}
 	}
@@ -106,16 +105,15 @@ public class CompanyService {
 		if (list.isEmpty()) {
 			System.out.println("조회된 기업 없음");
 		} else {
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.printf("%5s %5s %15s %14s %10s %14s", "기업번호", "기업명", "기업전화번호", "기업이메일", "기업주소", "기업분야");
-			System.out.println();
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			for (Company c : list) {
-				System.out.format("%5d %10s %13s %20s %10s %16s", c.getCnum(), c.getCname(), c.getTell(), c.getEmail(), c.getAddr(), c.getField());
-				System.out.println();
-			}
+			System.out.println("=== 전체 기업 조회 ===");
 			System.out.println(
-			        "--------------------------------------------------------------------------------------------------");
+					"--------------------------------------------------------------------------------------------------");
+			for (Company c : list) {
+				System.out.println("기업번호 : " + c.getCnum() + "  || 기엄명 : " + c.getCname() + "  || 기업 분야 : " + c.getField());
+				System.out.println("전화번호 : " + c.getTell() + "  || 기업 이메일 : " + c.getEmail() + "  || 기업주소 : " + c.getAddr());
+				System.out.println(
+						"--------------------------------------------------------------------------------------------------");
+			}
 			System.out.println();
 		}
 	}

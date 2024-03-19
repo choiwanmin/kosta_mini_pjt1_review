@@ -19,7 +19,6 @@ public class NoticeService {
 	}
 
 	// 공고 등록
-
 	public void addNotice(Scanner sc) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		System.out.println("=== 공고 등록 ===");
@@ -72,7 +71,7 @@ public class NoticeService {
 			e.printStackTrace();
 		}
 	}
-
+	
 	// 공고 번호로 검색
 	public void getByNum(Scanner sc) {
 		System.out.println("=== 번호로 검색 ===");
@@ -83,11 +82,8 @@ public class NoticeService {
 			System.out.println("없는 글번호");
 		} else {
 			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.printf("%6s %9s %10s %10s %10s %10s", "공고번호", "기업번호", "직무", "급여", "지원일", "마감일");
-			System.out.println();
-			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.format("%5d %11d %16s %8d %14s %11s", n.getCom_id(), n.getcNum(), n.getJob(), n.getSalary(), n.getPeriod(), n.getDeadLine());
-			System.out.println();
+			System.out.println("공고번호 : " + n.getCom_id() + "  || 기업명 : " + cdao.selectCompanyByCnum(n.getcNum()).getCname() + "  || 기업번호 : " + n.getcNum());
+			System.out.println("직무 : " + n.getJob() + "  || 급여 : " + n.getSalary() + "  || 공고기간 : " + n.getPeriod() + " 부터 " + n.getDeadLine() + " 까지");
 			System.out.println("--------------------------------------------------------------------------------------------------");
 			System.out.println();
 			if (no.getcNum() == n.getcNum()) {
@@ -115,14 +111,11 @@ public class NoticeService {
 			System.out.println("검색된 결과가 없다");
 		} else {
 			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.printf("%6s %9s %10s %10s %10s %10s", "공고번호", "기업번호", "직무", "급여", "지원일", "마감일");
-			System.out.println();
-			System.out.println("--------------------------------------------------------------------------------------------------");
 			for (Notice n : list) {
-				System.out.format("%5d %11d %16s %8d %14s %11s", n.getCom_id(), n.getcNum(), n.getJob(), n.getSalary(), n.getPeriod(), n.getDeadLine());
-				System.out.println();
+				System.out.println("공고번호 : " + n.getCom_id() + "  || 기업명 : " + cdao.selectCompanyByCnum(n.getcNum()).getCname() + "  || 기업번호 : " + n.getcNum());
+				System.out.println("직무 : " + n.getJob() + "  || 급여 : " + n.getSalary() + "  || 공고기간 : " + n.getPeriod() + " 부터 " + n.getDeadLine() + " 까지");
+				System.out.println("--------------------------------------------------------------------------------------------------");
 			}
-			System.out.println("--------------------------------------------------------------------------------------------------");
 			System.out.println();
 		}
 	}
@@ -135,14 +128,11 @@ public class NoticeService {
 			System.out.println("검색된 결과가 없다");
 		} else {
 			System.out.println("--------------------------------------------------------------------------------------------------");
-			System.out.printf("%6s %9s %10s %10s %10s %10s", "공고번호", "기업번호", "직무", "급여", "지원일", "마감일");
-			System.out.println();
-			System.out.println("--------------------------------------------------------------------------------------------------");
 			for (Notice n : list) {
-				System.out.format("%5d %11d %16s %8d %14s %11s", n.getCom_id(), n.getcNum(), n.getJob(), n.getSalary(), n.getPeriod(), n.getDeadLine());
-				System.out.println();
+				System.out.println("공고번호 : " + n.getCom_id() + "  || 기업명 : " + cdao.selectCompanyByCnum(n.getcNum()).getCname() + "  || 기업번호 : " + n.getcNum());
+				System.out.println("직무 : " + n.getJob() + "  || 급여 : " + n.getSalary() + "  || 공고기간 : " + n.getPeriod() + " 부터 " + n.getDeadLine() + " 까지");
+				System.out.println("--------------------------------------------------------------------------------------------------");
 			}
-			System.out.println("--------------------------------------------------------------------------------------------------");
 			System.out.println();
 		}
 	}
