@@ -216,6 +216,7 @@ public class Menu {
 					snservice.viewUser();
 					break;
 				case 7:
+					noservice.editDate(sc);
 					break;
 				case 8:
 					System.out.println("나가기");
