@@ -143,13 +143,13 @@ public class NuserService {
 		Intro i = idao.selectById(id, nuser.getUnum());
 		if (i == null) {
 			System.out.println("없음");
+			System.out.println();
 		} else {
 			System.out.println("--------------------------------------------------------------------------------------------------");
 			System.out.println("이력서 번호 : " + i.getId() + "  || 기업명 : " + cdao.selectCompanyByCnum(i.getCnum()) + "  || 기업번호 : " + i.getCnum());
 			System.out.println("제목 : " +i.getTitle());
 			System.out.println("내용 : " +i.getContent());
 			System.out.println("--------------------------------------------------------------------------------------------------");
-		}
 			if (AdminService.UserID == nuser.getUserid()) {
 				System.out.println("1.내이력서수정  2.내이력서삭제  3.나가기");
 				int x = sc.nextInt();
@@ -163,6 +163,7 @@ public class NuserService {
 				}
 			}
 		}
+	}
 
 	// 내 이력서 조회(제목)
 	public void getByTitle(Scanner sc) {
