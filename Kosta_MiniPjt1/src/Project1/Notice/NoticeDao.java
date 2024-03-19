@@ -94,7 +94,7 @@ public class NoticeDao {
 	
 	public Notice select(int com_id) {
 		Connection conn = db.conn();
-		String sql = "select * from notice where com_id=?";
+		String sql = "select * from notice where com_id=? order by com_id";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -148,7 +148,7 @@ public class NoticeDao {
 	
 	public ArrayList<Notice> selectAll(){
 		Connection conn = db.conn();
-		String sql = "select * from notice order by com_id";
+		String sql = "select * from notice order by period";
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -170,12 +170,7 @@ public class NoticeDao {
 		}
 		return list;
 	}
-	
-	
-	
 
-	
-	
 	public void delete(int com_id) {
 		Connection conn = db.conn();
 		String sql = "delete notice where com_id=?";
@@ -193,6 +188,29 @@ public class NoticeDao {
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// 끌어올리기
+	public void updateDate(Date sqldate,int com_id) {
+		Connection conn = db.conn();
+		String sql = "update notice set period=? where com_id=?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+// 오늘 날짜를 가져와서 SQL Date로 변환
+			Date today = Date.valueOf(LocalDate.now());
+			pstmt.setDate(1, today);
+			pstmt.setInt(2, com_id);
+			int cnt = pstmt.executeUpdate();
+			System.out.println(cnt + " 줄 수정됨");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

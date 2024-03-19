@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Project1.Admin.AdminService;
+import Project1.Company.Company;
 import Project1.Intro.Intro;
 import Project1.Intro.IntroDao;
 
@@ -46,8 +47,6 @@ public class NuserService {
 		String name = sc.next();
 		System.out.print("최종 학력 : ");
 		String edu = sc.next();
-		System.out.print("주민등록 번호 : ");
-		String id = sc.next();
 		System.out.print("전화번호 : ");
 		String tel = sc.next();
 		System.out.print("메일주소 : ");
@@ -55,11 +54,11 @@ public class NuserService {
 		System.out.print("주소 : ");
 		String addr = sc.next();
 		System.out.print("경력 : ");
-		String career = sc.nextLine();
+		String career = sc.next();
 		System.out.print("자격증 : ");
 		String license = sc.next();
 
-		ndao.update(new Nuser(0, 0, name, edu, id, tel, email, addr, career, license), AdminService.UserID);
+		ndao.update(new Nuser(0, 0, name, edu, "", tel, email, addr, career, license), AdminService.UserID);
 	}
 
 	// 회원정보 삭제
@@ -84,7 +83,7 @@ public class NuserService {
 
 	}
 
-	// 이력서 등록
+	// 내 이력서 등록
 	// 주석
 	private int id = 0;
 	public void addIntro(Scanner sc) {
@@ -96,14 +95,12 @@ public class NuserService {
 		sc.nextLine();
 		System.out.print("내 이력서 내용 : ");
 		String content = sc.next();
-		// 첫번째 파람으로 unum을 받아 오는 NuserDao 필요할지??
-//		Nuser nuser = ndao.select(AdminService.UserID);
-		Nuser nuser = ndao.select(2);
+		Nuser nuser = ndao.select(AdminService.UserID);
 		id++;
 		idao.insert(new Intro(0, title, content, id, cnum), nuser.getUnum());
 	}
 
-	// 이력서 수정
+	// 내 이력서 수정
 	public void editIntro(Scanner sc) {
 		System.out.println("=== 내 이력서 수정 ===");
 		System.out.print("내 이력서 번호 : ");
@@ -113,7 +110,6 @@ public class NuserService {
 		sc.nextLine();
 		System.out.print("새로운 내 이력서 내용 : ");
 		String content = sc.next();
-		// 제출한 회사까지 수정 가능해야 하는가?
 		Nuser nuser = ndao.select(AdminService.UserID);
 		int cnt = idao.update(new Intro(nuser.getUnum(), title, content, id, 0), id);
 		if (cnt > 0) {
@@ -123,28 +119,35 @@ public class NuserService {
 		}
 	}
 
-	// 이력서 삭제
+	// 내 이력서 삭제
 	public void delIntro(Scanner sc) {
 		System.out.println("=== 내 이력서 삭제 ===");
 		// 이력서 조회하여 확인후 번호 삭제?
 		System.out.print("내 이력서 번호 : ");
 		int id = sc.nextInt();
 		System.out.println(id + "번 이력서 삭제 완료");
-		idao.delete(id);
+		Nuser nuser = ndao.select(AdminService.UserID);
+		idao.delete(id, nuser.getUnum());
 	}
 
-	// 이력서 조회(번호)
+	// 내 이력서 조회(번호)
 	public void getById(Scanner sc) {
 		System.out.println("=== 내 이력서 조회(번호) ===");
 		System.out.print("내 이력서 번호 : ");
 		int id = sc.nextInt();
-		Intro i = idao.selectById(id);
+		Nuser nuser = ndao.select(AdminService.UserID);
+		Intro i = idao.selectById(id, nuser.getUnum());
 		if (i == null) {
 			System.out.println("없음");
 		} else {
-			System.out.println(i);
-			Nuser nuser = ndao.select(i.getUnum());
-			// 로그인 아이디 unum과 이력서 작성자 unum이 같으면 수정삭제 가능?
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.printf("%10s %10s %10s %10s", "이력서번호", "기업번호", "제목", "내용");
+			System.out.println();
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.format("%5d %5d %-30s %-50s", i.getId(), i.getCnum(), i.getTitle(), i.getContent());
+			System.out.println();
+			System.out.println("--------------------------------------------------------------------------------------------------");
+		}
 			if (AdminService.UserID == nuser.getUserid()) {
 				System.out.println("1.내이력서수정  2.내이력서삭제  3.나가기");
 				int x = sc.nextInt();
@@ -158,15 +161,14 @@ public class NuserService {
 				}
 			}
 		}
-	}
 
-	// 이력서 조회(제목)
+	// 내 이력서 조회(제목)
 	public void getByTitle(Scanner sc) {
 		System.out.println("=== 내 이력서 조회(제목) ===");
 		System.out.print("내 이력서 제목 : ");
 		String title = sc.next();
-
-		ArrayList<Intro> list = idao.selectByTitle(title);
+		Nuser nuser = ndao.select(AdminService.UserID);
+		ArrayList<Intro> list = idao.selectByTitle(title, nuser.getUnum());
 		if (list.isEmpty()) {
 			System.out.println("없음");
 		} else {
@@ -176,10 +178,13 @@ public class NuserService {
 		}
 	}
 
-	// 이력서 조회(전체)
+	// 내 이력서 조회(전체)
 	public void getAll() {
 		System.out.println("=== 내 이력서 조회(전체 목록) ===");
-		ArrayList<Intro> list = idao.selectAll();
+
+		Nuser nuser = ndao.selectByUserid(AdminService.UserID);
+		int unum = nuser.getUnum();
+		ArrayList<Intro> list = idao.selectMyIntro(unum);
 		if (list.isEmpty()) {
 			System.out.println("없음");
 		} else {
@@ -188,4 +193,5 @@ public class NuserService {
 			}
 		}
 	}
+	
 }
