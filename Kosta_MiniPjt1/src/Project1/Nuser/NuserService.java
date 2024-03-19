@@ -137,6 +137,7 @@ public class NuserService {
 		Intro i = idao.selectById(id, nuser.getUnum());
 		if (i == null) {
 			System.out.println("없음");
+			System.out.println();
 		} else {
 			System.out.println("--------------------------------------------------------------------------------------------------");
 			System.out.printf("%10s %10s %13s %53s", "이력서번호", "기업번호", "제목", "내용");
@@ -146,7 +147,6 @@ public class NuserService {
 			System.out.println();
 			System.out.println("--------------------------------------------------------------------------------------------------");
 			System.out.println();
-		}
 			if (AdminService.UserID == nuser.getUserid()) {
 				System.out.println("1.내이력서수정  2.내이력서삭제  3.나가기");
 				int x = sc.nextInt();
@@ -159,6 +159,7 @@ public class NuserService {
 					break;
 				}
 			}
+		}
 		}
 
 	// 내 이력서 조회(제목)
