@@ -4,6 +4,11 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,eclipse,intellij,java
 
 ### Eclipse ###
+
+##
+#
+src/JDBC/DBConnect.java
+
 .metadata
 bin/
 tmp/
