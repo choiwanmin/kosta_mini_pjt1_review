@@ -10,7 +10,8 @@ import java.sql.SQLException;
 //규형 테스트용 
 public class DBConnect {
 	private static DBConnect dbconn = new DBConnect();
-	private String url = "jdbc:oracle:thin:@localhost:1521/xe"; // localhost 명을 ip 주소로
+//	private String url = "jdbc:oracle:thin:@localhost:1521/xe"; // localhost 명을 ip 주소로
+	private String url = "jdbc:oracle:thin:@localhost:49161/xe"; // localhost 명을 ip 주소로
 	
 	private DBConnect() {}
 	
